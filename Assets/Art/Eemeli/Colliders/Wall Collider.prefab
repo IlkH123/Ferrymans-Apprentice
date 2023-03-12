@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6245412738352289050}
   - component: {fileID: 6245412738352289045}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall Collider
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

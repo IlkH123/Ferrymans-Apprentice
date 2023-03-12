@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3667626279148916342}
   - component: {fileID: 3667626279148916343}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Floor Collider
   m_TagString: Ground
   m_Icon: {fileID: 0}

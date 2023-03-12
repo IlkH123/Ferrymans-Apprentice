@@ -9,8 +9,12 @@ public class AutoScroll : MonoBehaviour
     float textPosEnd = 550f;
 
     RectTransform myGorectTransform;
+    //[SerializeField]
+    //TextMeshProUGUI mainText;
     [SerializeField]
-    TextMeshProUGUI mainText;
+    GameObject introBackdrop;
+    [SerializeField]
+    GameObject audioSource;
     [SerializeField]
     bool isLooping = false;
 
@@ -19,6 +23,7 @@ public class AutoScroll : MonoBehaviour
     {
         myGorectTransform = GetComponent<RectTransform>();
         StartCoroutine(AutoScrollText());
+        
 
     }
 
@@ -42,6 +47,14 @@ public class AutoScroll : MonoBehaviour
             
 
         }
+
+
+        //Turning all the objects in the intro crawl off,
+        //might want to keep the ambience.
+        // TODO: smooth out the transition
+        introBackdrop.SetActive(false);
+        gameObject.SetActive(false);
+        audioSource.SetActive(false);
     }
 
 }
