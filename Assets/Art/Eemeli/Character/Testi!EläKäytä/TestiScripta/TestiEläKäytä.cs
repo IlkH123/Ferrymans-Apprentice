@@ -9,6 +9,7 @@ public class TestiEläKäytä : MonoBehaviour
     private BoxCollider2D bc;
     public Animator animator;
     public TestiEläkäytä2 testi;
+    public Transform camera;
 
 
     float moveSpeed;
@@ -35,6 +36,8 @@ public class TestiEläKäytä : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //camera.transform.rotation = Quaternion.Euler(0.0f, 0.0f, gameObject.transform.rotation.z * -1.0f);
+
         if (Input.GetKey(KeyCode.Mouse0) && !attacking)
         {
             Attack();
@@ -47,7 +50,7 @@ public class TestiEläKäytä : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
-            //children.transform.eulerAngles = new Vector3(0, 0, 0); // Flipped
+            this.transform.eulerAngles = new Vector3(0, 0, 0); // Flipped
             rb.transform.Translate(new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime);
 
             animator.SetFloat("walkMultiplier", 1f);
@@ -56,8 +59,8 @@ public class TestiEläKäytä : MonoBehaviour
         else if (Input.GetKey(KeyCode.A))
         {
 
-            //children.transform.eulerAngles = new Vector3(0, 180, 0);
-            rb.transform.Translate(new Vector3(-1, 0, 0) * moveSpeed * Time.deltaTime);
+            this.transform.eulerAngles = new Vector3(0, 180, 0);
+            rb.transform.Translate(new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime);
 
 
             animator.SetFloat("walkMultiplier", -1f);
