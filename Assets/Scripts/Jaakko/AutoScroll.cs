@@ -18,11 +18,22 @@ public class AutoScroll : MonoBehaviour
     [SerializeField]
     bool isLooping = false;
 
+    public bool runIntro = false;
+
     // Start is called before the first frame update
     void Start()
     {
         myGorectTransform = GetComponent<RectTransform>();
+        if(runIntro)
+        {
         StartCoroutine(AutoScrollText());
+        }
+        else if (!runIntro)
+        {
+            introBackdrop.SetActive(false);
+            gameObject.SetActive(false);
+            audioSource.SetActive(false);
+        }
         
 
     }

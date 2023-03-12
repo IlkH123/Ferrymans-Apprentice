@@ -5,8 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-   public void MoveToScene(int sceneID)
+    // Scene Indexes for the current and the next scene,
+    // The next scene must be set from the editor
+    // You'll find the scene Indices under File> Build Settings
+    [SerializeField]
+    int currentSceneID, nextSceneID;
+
+    void Start()
     {
-        SceneManager.LoadScene(sceneID);
+        // Saves the Index of the scene the object is in
+        // on initialization
+        currentSceneID = gameObject.scene.buildIndex;
     }
+
+    // This is the event method that gets called when the collider set
+    // to the object is set as trigger and collided with
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            //Debug.Log(other + " Entered the trigger");
+            SceneManager.LoadScene(nextSceneID);
+        }
+    }
+
 }
+
