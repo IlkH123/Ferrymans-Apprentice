@@ -9,17 +9,22 @@ public class TestiEläKäytä : MonoBehaviour
     private BoxCollider2D bc;
     public Animator animator;
     public TestiEläkäytä2 testi;
-    public Transform camera;
+    public CircleCollider2D staffCollider;
 
 
     float moveSpeed;
     float jumpForce;
     private bool isGround;
     private bool attacking = false;
+    private bool blocking = false;
+
+    private int health;
+    private int maxHealth;
+    public int souls;
 
 
 
-    // Start is called before the first frame update
+
     void Start()
     {    
         rb = GetComponent<Rigidbody2D>();
@@ -29,19 +34,27 @@ public class TestiEläKäytä : MonoBehaviour
 
         rb.freezeRotation = true;
         moveSpeed = 5;
-        jumpForce = 7;
+        jumpForce = 8;
         isGround = true;
+
+        health = 5;
+        maxHealth = health;
+        souls = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //camera.transform.rotation = Quaternion.Euler(0.0f, 0.0f, gameObject.transform.rotation.z * -1.0f);
-
+        //if (!attacking)
         if (Input.GetKey(KeyCode.Mouse0) && !attacking)
         {
             Attack();
         }
+
+        if (Input.GetKey(KeyCode.Mouse1) && !attacking)
+        {
+            Block();
+        }
+        else blocking = false;
     }
 
     void FixedUpdate()
@@ -55,6 +68,7 @@ public class TestiEläKäytä : MonoBehaviour
 
             animator.SetFloat("walkMultiplier", 1f);
             animator.SetBool("isWalking", true);
+            //sound
         }
         else if (Input.GetKey(KeyCode.A))
         {
@@ -65,15 +79,20 @@ public class TestiEläKäytä : MonoBehaviour
 
             animator.SetFloat("walkMultiplier", -1f);
             animator.SetBool("isWalking", true);
+            //sound
         }
 
-        else animator.SetBool("isWalking", false);
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
 
         if (Input.GetKey(KeyCode.Space) && isGround)
         {
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             animator.SetTrigger("jump");
             isGround = false;
+            //sound
         }
 
         
@@ -85,18 +104,51 @@ public class TestiEläKäytä : MonoBehaviour
         {
             isGround = true;
         }
+
+        //if(col.gameObject.CompareTag("CollectbileHealth"))
+        {
+            health += 2;
+            //particles, destroy col.object
+            if(health > maxHealth)
+            {
+                health = maxHealth;
+                //RefreshUI();
+            }
+        }
     }
 
     private void Attack()
     {
+        staffCollider.enabled = true;
         attacking = true;
         animator.SetTrigger("attack");
-    }
 
+        //sound
+    }
     public void AttackReset() 
     {
+        staffCollider.enabled = false;
         attacking = false;
     }
+
+    public void Block()
+    {
+        //anim, particle?
+        blocking = true;
+    }
+
+    public void TakeDamage()
+    {
+        //if blocking? damageTaken *= 0.5f;
+        health -= 1;
+        //RefreshUI;
+        //anim, particles, sound
+        if(health <= 0)
+        {
+            //GameOver
+        }
+    }
+
 }
 
 
