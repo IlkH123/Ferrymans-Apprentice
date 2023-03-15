@@ -9,8 +9,8 @@ public class AutoScroll : MonoBehaviour
     float textPosEnd = 550f;
 
     RectTransform myGorectTransform;
-    //[SerializeField]
-    //TextMeshProUGUI mainText;
+    [SerializeField]
+    TextMeshProUGUI mainText;
     [SerializeField]
     GameObject introBackdrop;
     [SerializeField]
