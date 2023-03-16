@@ -9,7 +9,6 @@ public class TestiEläKäytä : MonoBehaviour
     private BoxCollider2D bc;
     public Animator animator;
     public TestiEläkäytä2 testi;
-    public CircleCollider2D staffCollider;
 
 
     float moveSpeed;
@@ -17,6 +16,7 @@ public class TestiEläKäytä : MonoBehaviour
     private bool isGround;
     private bool attacking = false;
     private bool blocking = false;
+    private bool doubleJump = false;
 
     private int health;
     private int maxHealth;
@@ -26,7 +26,7 @@ public class TestiEläKäytä : MonoBehaviour
 
 
     void Start()
-    {    
+    {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponentInChildren<BoxCollider2D>();
         animator = GetComponentInChildren<Animator>();
@@ -44,112 +44,142 @@ public class TestiEläKäytä : MonoBehaviour
 
     void Update()
     {
-        //if (!attacking)
-        if (Input.GetKey(KeyCode.Mouse0) && !attacking)
+        if (!attacking)
         {
-            Attack();
-        }
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                Attack();
+            }
 
-        if (Input.GetKey(KeyCode.Mouse1) && !attacking)
-        {
-            Block();
+            if (Input.GetKey(KeyCode.Mouse1))
+            {
+                Block();
+            }
+            else blocking = false;
+
+            if (Input.GetKeyDown(KeyCode.E) && isGround) // && soul and collider blah blah
+            {
+                CollectSoul();
+            }
+
+
         }
-        else blocking = false;
     }
-
     void FixedUpdate()
-    {
-
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            this.transform.eulerAngles = new Vector3(0, 0, 0); // Flipped
-            rb.transform.Translate(new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime);
-
-            animator.SetFloat("walkMultiplier", 1f);
-            animator.SetBool("isWalking", true);
-            //sound
-        }
-        else if (Input.GetKey(KeyCode.A))
         {
 
-            this.transform.eulerAngles = new Vector3(0, 180, 0);
-            rb.transform.Translate(new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime);
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                this.transform.eulerAngles = new Vector3(0, 0, 0); // Flipped
+                rb.transform.Translate(new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime);
+
+                animator.SetFloat("walkMultiplier", 1f);
+                animator.SetBool("isWalking", true);
+                //sound
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+
+                this.transform.eulerAngles = new Vector3(0, 180, 0);
+                rb.transform.Translate(new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime);
 
 
-            animator.SetFloat("walkMultiplier", -1f);
-            animator.SetBool("isWalking", true);
-            //sound
-        }
+                animator.SetFloat("walkMultiplier", -1f);
+                animator.SetBool("isWalking", true);
+                //sound
+            }
 
-        else
+            else
+            {
+                animator.SetBool("isWalking", false);
+            }
+
+            if (Input.GetKey(KeyCode.Space) && isGround)
+            {
+                rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+                animator.SetTrigger("jump");
+                isGround = false;
+                StartCoroutine(DoubleJumpTimer());
+                //sound
+
+
+
+            }
+        if (Input.GetKeyDown(KeyCode.Space) && doubleJump)
         {
-            animator.SetBool("isWalking", false);
-        }
-
-        if (Input.GetKey(KeyCode.Space) && isGround)
-        {
+            doubleJump = false;
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             animator.SetTrigger("jump");
-            isGround = false;
-            //sound
         }
 
-        
+
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Ground"))
+        private void OnCollisionEnter2D(Collision2D col)
         {
-            isGround = true;
+            if (col.gameObject.CompareTag("Ground"))
+            {
+                isGround = true;
+                doubleJump = false;
         }
 
-        //if(col.gameObject.CompareTag("CollectbileHealth"))
-        {
-            health += 2;
-            //particles, destroy col.object
-            if(health > maxHealth)
+            //if(col.gameObject.CompareTag("CollectbileHealth"))
             {
-                health = maxHealth;
-                //RefreshUI();
+                health += 2;
+                //particles, destroy col.object
+                if (health > maxHealth)
+                {
+                    health = maxHealth;
+                    //RefreshUI();
+                }
             }
         }
-    }
 
-    private void Attack()
-    {
-        staffCollider.enabled = true;
-        attacking = true;
-        animator.SetTrigger("attack");
-
-        //sound
-    }
-    public void AttackReset() 
-    {
-        staffCollider.enabled = false;
-        attacking = false;
-    }
-
-    public void Block()
-    {
-        //anim, particle?
-        blocking = true;
-    }
-
-    public void TakeDamage()
-    {
-        //if blocking? damageTaken *= 0.5f;
-        health -= 1;
-        //RefreshUI;
-        //anim, particles, sound
-        if(health <= 0)
+        private void Attack()
         {
-            //GameOver
+            attacking = true;
+            animator.SetTrigger("attack");
+
+            //sound
         }
+        public void AttackReset()
+        {
+            attacking = false;
+        }
+
+        public void Block()
+        {
+            //anim, particle?
+            blocking = true;
+        }
+
+        public void TakeDamage()
+        {
+            //if blocking? damageTaken *= 0.5f;
+            health -= 1;
+            //RefreshUI;
+            //anim, particles, sound
+            if (health <= 0)
+            {
+                //GameOver
+            }
+        }
+
+    void CollectSoul()
+    {
+        animator.SetTrigger("collectSoul");
+        //destroy col.gameobject, soul += 1
     }
 
-}
+    IEnumerator DoubleJumpTimer()
+    {
+        yield return new WaitForSeconds(0.2f);
+        doubleJump = true;
+    }
+
+
+} 
 
 
 
