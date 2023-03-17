@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 3943760640513176352}
   - component: {fileID: 3300710091813329110}
   m_Layer: 0
-  m_Name: Soul_Prefab
+  m_Name: apfkeajgf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -388,7 +388,7 @@ MonoBehaviour:
   - {fileID: 1192019613100075766}
   - {fileID: 7024465395921142326}
   m_Bounds:
-    m_Center: {x: -0.0000021457672, y: 0.010542393, z: 0}
+    m_Center: {x: -0.00000071525574, y: 0.0105443, z: 0}
     m_Extent: {x: 2.5049996, y: 4.3542633, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -495,7 +495,7 @@ MonoBehaviour:
   - {fileID: 2196501070804067098}
   - {fileID: 135308975510284000}
   m_Bounds:
-    m_Center: {x: -0.00055098534, y: -0.0022696257, z: 0}
+    m_Center: {x: -0.000549078, y: -0.0022701025, z: 0}
     m_Extent: {x: 1.316909, y: 0.79272985, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -4207,7 +4207,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
     type: 0
     collisionMode: 0

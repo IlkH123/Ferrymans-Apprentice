@@ -9,21 +9,22 @@ public class TestiEläKäytä : MonoBehaviour
     private BoxCollider2D bc;
     public Animator animator;
     public TestiEläkäytä2 testi;
+    private GameObject currentSoul;
 
 
     float moveSpeed;
+    float currentSpeed;
     float jumpForce;
     private bool isGround;
     private bool attacking = false;
-    private bool blocking = false;
+    public bool blocking = false;
     private bool doubleJump = false;
+    private bool soulClose = false;
+    private bool collecting = false;
 
     private int health;
     private int maxHealth;
     public int souls;
-
-
-
 
     void Start()
     {
@@ -40,11 +41,12 @@ public class TestiEläKäytä : MonoBehaviour
         health = 5;
         maxHealth = health;
         souls = 0;
+        currentSpeed = moveSpeed;
     }
 
     void Update()
     {
-        if (!attacking)
+        if (!collecting && !attacking)
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
@@ -55,24 +57,35 @@ public class TestiEläKäytä : MonoBehaviour
             {
                 Block();
             }
-            else blocking = false;
-
-            if (Input.GetKeyDown(KeyCode.E) && isGround) // && soul and collider blah blah
+            else
             {
+                blocking = false;
+                animator.SetBool("blocking", false);
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) && isGround && soulClose)
+            {    
                 CollectSoul();
             }
 
 
         }
-    }
-    void FixedUpdate()
+
+        if(Input.GetKeyDown(KeyCode.C))
         {
 
+        }
+    }
+    void FixedUpdate()
+    {
 
+        if (!collecting && !blocking)
+        {
+            //Addforce + drag, airdrag = 0
             if (Input.GetKey(KeyCode.D))
             {
                 this.transform.eulerAngles = new Vector3(0, 0, 0); // Flipped
-                rb.transform.Translate(new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime);
+                rb.transform.Translate(new Vector3(1, 0, 0) * currentSpeed * Time.deltaTime);
 
                 animator.SetFloat("walkMultiplier", 1f);
                 animator.SetBool("isWalking", true);
@@ -89,7 +102,6 @@ public class TestiEläKäytä : MonoBehaviour
                 animator.SetBool("isWalking", true);
                 //sound
             }
-
             else
             {
                 animator.SetBool("isWalking", false);
@@ -102,74 +114,104 @@ public class TestiEläKäytä : MonoBehaviour
                 isGround = false;
                 StartCoroutine(DoubleJumpTimer());
                 //sound
-
-
-
             }
-        if (Input.GetKeyDown(KeyCode.Space) && doubleJump)
-        {
-            doubleJump = false;
-            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-            animator.SetTrigger("jump");
+            if (Input.GetKeyDown(KeyCode.Space) && doubleJump)
+            {
+                doubleJump = false;
+                rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+                animator.SetTrigger("jump");
+            }
         }
-
-
     }
 
-        private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Ground"))
         {
-            if (col.gameObject.CompareTag("Ground"))
-            {
-                isGround = true;
-                doubleJump = false;
+            isGround = true;
+            doubleJump = false;
         }
 
-            //if(col.gameObject.CompareTag("CollectbileHealth"))
+        if (col.gameObject.CompareTag("Health") && health < maxHealth)
+        {
+            Destroy(col.gameObject);
+            health += 2;
+            Debug.Log("Healed, HP: " + health);
+            //particles
+            if (health > maxHealth)
             {
-                health += 2;
-                //particles, destroy col.object
-                if (health > maxHealth)
-                {
-                    health = maxHealth;
-                    //RefreshUI();
-                }
+                health = maxHealth;
+                //RefreshUI();
             }
         }
+    }
 
-        private void Attack()
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Soul"))
         {
-            attacking = true;
-            animator.SetTrigger("attack");
+            soulClose = true;
+            currentSoul = collision.gameObject;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Soul"))
+        {
+            soulClose = false;
+            currentSoul = null;
+        }
+    }
 
-            //sound
-        }
-        public void AttackReset()
-        {
-            attacking = false;
-        }
+    private void Attack()
+    {
+        blocking = false;
+        attacking = true;
+        animator.SetTrigger("attack");
 
-        public void Block()
-        {
-            //anim, particle?
-            blocking = true;
-        }
+        //sound
+    }
+    public void AttackReset()
+    {
+        attacking = false;
+    }
 
-        public void TakeDamage()
+    public void Block()
+    {
+        //anim, particle?
+        blocking = true;
+        animator.SetBool("blocking", true);
+    }
+
+    public void TakeDamage()
+    {
+
+        health -= 1;
+        Debug.Log("I've taken damage! HP: " + health);
+        //RefreshUI;
+        //anim, particles, sound
+        if (health <= 0)
         {
-            //if blocking? damageTaken *= 0.5f;
-            health -= 1;
-            //RefreshUI;
-            //anim, particles, sound
-            if (health <= 0)
-            {
-                //GameOver
-            }
+            //GameOver
         }
+    }
 
     void CollectSoul()
     {
+        currentSpeed = 0;
+        collecting = true;
         animator.SetTrigger("collectSoul");
-        //destroy col.gameobject, soul += 1
+        StartCoroutine(CollectReset());
+        //particles, sound, animation for soul    
+    }
+    IEnumerator CollectReset()
+    {
+        yield return new WaitForSeconds(2f);
+        collecting = false;
+        currentSpeed = moveSpeed;
+        Destroy(currentSoul.gameObject);
+        souls += 1;
+        Debug.Log(souls);
     }
 
     IEnumerator DoubleJumpTimer()
@@ -179,7 +221,7 @@ public class TestiEläKäytä : MonoBehaviour
     }
 
 
-} 
+}
 
 
 
