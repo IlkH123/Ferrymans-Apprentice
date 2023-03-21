@@ -22,6 +22,9 @@ public class TestiEläKäytä : MonoBehaviour
     private int maxHealth;
     public int souls;
 
+    AudioSource jump;
+    public AudioClip jumpSound;
+
 
 
 
@@ -30,6 +33,7 @@ public class TestiEläKäytä : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponentInChildren<BoxCollider2D>();
         animator = GetComponentInChildren<Animator>();
+        jump = GetComponent<AudioSource>();
 
 
         rb.freezeRotation = true;
@@ -93,6 +97,7 @@ public class TestiEläKäytä : MonoBehaviour
             animator.SetTrigger("jump");
             isGround = false;
             //sound
+            jump.PlayOneShot(jumpSound);
         }
 
         
