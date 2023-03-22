@@ -4,33 +4,38 @@ using UnityEngine;
 
 public class CameraFocus : MonoBehaviour
 {
-    // editor would not stop being a cunt about null
-    // expression so everything is surrounded by if blocks
     Camera camera;
     Vector3 cameraRestPoint;
-    Vector2 bounds;
-    float newX, newY, defaultZ;
+    float defaultZ;
+    public bool groundCheck;
+
+    // Margin points in viewport coordinates,
+    // values range from 0 to 1 where 0,0 is bottom left
+    // and 1,1 is top right
+    Vector2 ViewportTopLeft = new Vector2(0.25f, 0.75f);
+    Vector2 ViewportTopRight = new Vector2(0.75f, 0.75f);
+    Vector2 ViewportBottomLeft = new Vector2(0.25f, 0.3f);
+    Vector2 ViewportBottomRight = new Vector2(0.75f, 0.3f);
+
+    // These are for the screenspace conversions of the viewport coordinates
+    Vector2 edgeVectorTopLeft, 
+        edgeVectorTopRight, 
+        edgeVectorBottomLeft,
+        edgeVectorBottomRight;
 
     [SerializeField]
-    float marginSides, marginUp, marginDown;
+    float marginLeft, marginRight, marginUp, marginDown;
+    [SerializeField]
+    float newX, newY, restPointX, restPointY;
+
 
     // Start is called before the first frame update
     void Start()
     {
-
         camera = Camera.main;
-        
         defaultZ = camera.transform.position.z;
-        //marginSides = camera.pixelWidth * 0.1f;
-        //marginDown= camera.pixelHeight * 0.1f;
-        //marginUp= camera.pixelHeight * 0.1f;
-        //bounds = camera.ScreenToWorldPoint(new Vector2(
-        //    Screen.width - (2 * marginSides), 
-        //    Screen.height - (marginUp + marginDown)));
-        //cameraRestPoint = new Vector3(transform.position.x, transform.position.y, defaultZ);
+        cameraRestPoint = camera.transform.position;
 
-        //camera.transform.position = cameraRestPoint;
-        
     }
 
     // Update is called once per frame
@@ -38,14 +43,69 @@ public class CameraFocus : MonoBehaviour
     {
         newX = transform.position.x;
         newY = transform.position.y;
-        camera.transform.position = new Vector3(newX, newY, defaultZ);
+        restPointX = cameraRestPoint.x;
+        restPointY = cameraRestPoint.y;
+        marginLeft = edgeVectorBottomLeft.x;
+        marginRight= edgeVectorBottomRight.x;
+        marginUp= edgeVectorTopLeft.y;
+        marginDown= edgeVectorBottomLeft.y;
+
+
+        if( newX < marginLeft)
+        {
+            cameraRestPoint = new Vector3(
+                (cameraRestPoint.x + (newX - marginLeft)), 
+                cameraRestPoint.y, 
+                defaultZ);
+            camera.transform.position = cameraRestPoint;
+        }
+        if(newX > marginRight)
+        {
+            cameraRestPoint = new Vector3(
+               (cameraRestPoint.x + (newX - marginRight)),
+               cameraRestPoint.y,
+               defaultZ);
+            camera.transform.position = cameraRestPoint;
+        }
+        if (newY > marginUp && !groundCheck)
+        {
+            cameraRestPoint = new Vector3(
+               cameraRestPoint.x,
+               (cameraRestPoint.y + (newY - marginUp)),
+               defaultZ);
+            camera.transform.position = cameraRestPoint;
+        }
+        if (newY < marginDown)
+        {
+            cameraRestPoint = new Vector3(
+               cameraRestPoint.x,
+               (cameraRestPoint.y + (newY - marginDown)),
+               defaultZ);
+            camera.transform.position = cameraRestPoint;
+        }
+
+        // camera.transform.position = new Vector3(newX, newY, defaultZ);
+        UpdateMargins();
+        OnDrawGizmos();
+
+    }
+
+    void UpdateMargins()
+    {
+        // Conversion from viewport coordinates to screenspace coordinates
+        edgeVectorTopLeft = Camera.main.ViewportToWorldPoint(ViewportTopLeft);
+        edgeVectorBottomLeft = Camera.main.ViewportToWorldPoint(ViewportBottomLeft);
+        edgeVectorTopRight = Camera.main.ViewportToWorldPoint(ViewportTopRight);
+        edgeVectorBottomRight = Camera.main.ViewportToWorldPoint(ViewportBottomRight);
     }
 
     public void OnDrawGizmos()
     {
-       
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawCube(transform.position, bounds);
-       
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(edgeVectorTopLeft, edgeVectorTopRight);
+        Gizmos.DrawLine(edgeVectorTopRight, edgeVectorBottomRight);
+        Gizmos.DrawLine(edgeVectorBottomRight, edgeVectorBottomLeft);
+        Gizmos.DrawLine(edgeVectorBottomLeft, edgeVectorTopLeft);
+
     }
 }
