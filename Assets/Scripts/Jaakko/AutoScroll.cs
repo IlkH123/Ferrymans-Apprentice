@@ -26,6 +26,7 @@ public class AutoScroll : MonoBehaviour
         myGorectTransform = GetComponent<RectTransform>();
         if(runIntro)
         {
+            introBackdrop.SetActive(true);
         StartCoroutine(AutoScrollText());
         }
         else if (!runIntro)
