@@ -18,6 +18,12 @@ public class ChangeScene : MonoBehaviour
         currentSceneID = gameObject.scene.buildIndex;
     }
 
+    // This is for button objects
+    public void ButtonPress()
+    {
+        SceneManager.LoadScene(nextSceneID);
+    }
+
     // This is the event method that gets called when the collider set
     // to the object is set as trigger and collided with
     void OnTriggerEnter2D(Collider2D other)

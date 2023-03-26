@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
 {
     /*
      * Tää on mun väliaikanen oma movement scripti
-     * lähinnä pelkkästään testausta varten
+     * lähinnä pelkästään testausta varten
      * -Ilkka
      */
 
@@ -16,6 +16,8 @@ public class Movement : MonoBehaviour
     float moveSpeed, jumpForce, jumpTimer, jumpDelay;
     [SerializeField]
     Rigidbody2D rb;
+    [SerializeField]
+    CameraFocus camFoc;
     
     //[SerializeField]
     //GameObject sh;
@@ -35,6 +37,7 @@ public class Movement : MonoBehaviour
         rb.drag = 1f; // drag lower that this results in very slippery movement.
         rb.mass = 1f;
         rb.gravityScale = 2f;
+        camFoc = GetComponent<CameraFocus>();
 
         //Priming the movement system
         groundCheck = false;
@@ -74,6 +77,7 @@ public class Movement : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, yMove * jumpForce);
                 groundCheck = false;
+                camFoc.groundCheck = groundCheck;
                 jumpTimer = 0f;
                 jumpCount++;
             }
@@ -93,6 +97,7 @@ public class Movement : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             groundCheck = true;
+            camFoc.groundCheck = groundCheck;
             jumpCount = 0;
             jumpTimer = 0f;
         }

@@ -188,11 +188,13 @@ public class TestiEläKäytä : MonoBehaviour
 
         health -= 1;
         Debug.Log("I've taken damage! HP: " + health);
+        animator.SetTrigger("takeDamage");
         //RefreshUI;
         //anim, particles, sound
         if (health <= 0)
         {
             //GameOver
+            animator.SetBool("playerDead", true);
         }
     }
 

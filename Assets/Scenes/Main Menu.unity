@@ -855,6 +855,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab2b681425f1294abbabcfbf07bfb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSceneID: 0
+  nextSceneID: 1
 --- !u!114 &1159928690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -901,8 +903,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1159928689}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: MoveToScene
-        m_Mode: 3
+        m_MethodName: ButtonPress
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
