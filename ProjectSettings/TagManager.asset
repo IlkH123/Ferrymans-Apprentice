@@ -10,6 +10,8 @@ TagManager:
   - Enemy
   - Hand
   - Collectible
+  - Health
+  - Soul
   layers:
   - Default
   - TransparentFX
@@ -19,6 +21,7 @@ TagManager:
   - UI
   - Interactable Objects
   - Ground
+  - PlayerLayer
   - 
   - 
   - 
