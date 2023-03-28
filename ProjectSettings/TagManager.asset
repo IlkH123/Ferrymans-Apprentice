@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Door
   - Enemy
+  - Hand
+  - Collectible
   - Health
   - Soul
   layers:
@@ -18,6 +20,7 @@ TagManager:
   - Water
   - UI
   - Interactable Objects
+  - Ground
   - PlayerLayer
   - 
   - 
