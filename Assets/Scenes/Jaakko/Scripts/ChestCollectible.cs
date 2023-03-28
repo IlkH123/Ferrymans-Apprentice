@@ -14,7 +14,7 @@ public class ChestCollectible : MonoBehaviour
     void Start()
     {
         Chest = GetComponent<Animator>();
- 
+        Chest.SetBool("ChestOpen", false);
     }
 
     // Update is called once per frame
@@ -23,11 +23,25 @@ public class ChestCollectible : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2d(Collider other)
+    //private void OnTriggerEnter2d(Collider2D other)
+    //{
+    //   if (other.CompareTag("Player"))
+    //    {
+    //        Chest.SetBool("ChestOpen", true);
+    //        Debug.Log("Chest open");
+    //    }
+    //}
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-       if (other.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            Chest.SetTrigger("ChestOpen");
+            Debug.Log("Collided");
+            Chest.SetBool("ChestOpen", true);
         }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Chest.SetBool("ChestOpen", false);
+    }
+
 }
