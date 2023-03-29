@@ -23,10 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Jaakko/CabinTestiSceneJaakko.unity
     guid: 6deb4cf0ef9528b4b84cbcf119fa4d13
-  - enabled: 1
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   m_configObjects: {}
