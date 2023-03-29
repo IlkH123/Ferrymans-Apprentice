@@ -32,7 +32,7 @@ public class TestiEläKäytä : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponentInChildren<BoxCollider2D>();
         animator = GetComponentInChildren<Animator>();
-        jump = GetComponent<AudioSource>();
+        //jump = GetComponent<AudioSource>();
 
 
         rb.freezeRotation = true;
