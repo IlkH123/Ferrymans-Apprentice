@@ -35,7 +35,7 @@ public class ChestCollectible : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Collided");
+            //Debug.Log("Collided");
             Chest.SetBool("ChestOpen", true);
         }
     }
