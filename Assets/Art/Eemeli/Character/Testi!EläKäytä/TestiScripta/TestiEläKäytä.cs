@@ -68,7 +68,10 @@ public class TestiEläKäytä : MonoBehaviour
                 CollectSoul();
             }
 
-
+            if (Input.GetKey(KeyCode.K))
+            {
+                animator.SetTrigger("powerAttack"); //because i can xd
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.C))
@@ -223,8 +226,6 @@ public class TestiEläKäytä : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         doubleJump = false;
     }
-
-
 }
 
 
