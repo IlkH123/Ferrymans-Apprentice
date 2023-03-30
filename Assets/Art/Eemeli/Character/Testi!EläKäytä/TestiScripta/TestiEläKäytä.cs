@@ -26,11 +26,13 @@ public class TestiEläKäytä : MonoBehaviour
     private int maxHealth;
     public int souls;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponentInChildren<BoxCollider2D>();
         animator = GetComponentInChildren<Animator>();
+        //jump = GetComponent<AudioSource>();
 
 
         rb.freezeRotation = true;
@@ -125,6 +127,35 @@ public class TestiEläKäytä : MonoBehaviour
                 animator.SetTrigger("jump");
             }
         }
+
+        else if (Input.GetKey(KeyCode.A))
+        {
+
+            this.transform.eulerAngles = new Vector3(0, 180, 0);
+            rb.transform.Translate(new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime);
+
+
+            animator.SetFloat("walkMultiplier", -1f);
+            animator.SetBool("isWalking", true);
+            //sound
+        }
+
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
+
+        if (Input.GetKey(KeyCode.Space) && isGround)
+        {
+            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            animator.SetTrigger("jump");
+            isGround = false;
+            //sound
+           
+        }
+
+        
+
     }
 
     private void OnCollisionEnter2D(Collision2D col)
