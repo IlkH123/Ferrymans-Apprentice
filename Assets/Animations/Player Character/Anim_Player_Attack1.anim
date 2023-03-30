@@ -2979,9 +2979,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.41666666
-    functionName: TriggerEvent
+    functionName: TriggerEventAttack
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 48dea1160a7083442a201f0b5e9c6bc1, type: 3}
+    objectReferenceParameter: {fileID: 11500000, guid: 3dd9f2818e27ad24bbab0ecc7807e82f, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

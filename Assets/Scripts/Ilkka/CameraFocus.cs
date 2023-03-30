@@ -14,10 +14,10 @@ public class CameraFocus : MonoBehaviour
     // Margin points in viewport coordinates,
     // values range from 0 to 1 where 0,0 is bottom left
     // and 1,1 is top right
-    Vector2 ViewportTopLeft = new Vector2(0.25f, 0.75f);
-    Vector2 ViewportTopRight = new Vector2(0.75f, 0.75f);
-    Vector2 ViewportBottomLeft = new Vector2(0.25f, 0.3f);
-    Vector2 ViewportBottomRight = new Vector2(0.75f, 0.3f);
+    Vector2 ViewportTopLeft = new Vector2(0.35f, 0.65f);
+    Vector2 ViewportTopRight = new Vector2(0.65f, 0.65f);
+    Vector2 ViewportBottomLeft = new Vector2(0.35f, 0.3f);
+    Vector2 ViewportBottomRight = new Vector2(0.65f, 0.3f);
 
     // These are for the screenspace conversions of the viewport coordinates
     Vector2 edgeVectorTopLeft, 
@@ -61,21 +61,21 @@ public class CameraFocus : MonoBehaviour
                 break;
             case 2:
                 //Forest 1-1
-                spawnpoint = new Vector3(-20, 6, 0);
+                spawnpoint = new Vector3(-20, 1, 0);
                 gameObject.transform.position = spawnpoint;
                 reinitializeCameraObject(spawnpoint);
                 Debug.Log("entered Forest 1-1");
                 break;
             case 3:
                 //Forest 1-2
-                spawnpoint = new Vector3(0, 6, 0);
+                spawnpoint = new Vector3(0, 1, 0);
                 gameObject.transform.position = spawnpoint;
                 reinitializeCameraObject(spawnpoint);
                 Debug.Log("entered Forest 1-2");
                 break;
             case 4:
                 //Forest 1-3
-                spawnpoint = new Vector3(0, 6, 0);
+                spawnpoint = new Vector3(0, 1, 0);
                 gameObject.transform.position = spawnpoint;
                 reinitializeCameraObject(spawnpoint);
                 Debug.Log("entered Forest 1-3");
@@ -145,7 +145,7 @@ public class CameraFocus : MonoBehaviour
         //    }
         }
 
-        // camera.transform.position = new Vector3(newX, newY, defaultZ);
+        
         UpdateMargins();
         //OnDrawGizmos();
 
