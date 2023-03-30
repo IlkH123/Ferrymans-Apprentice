@@ -70,7 +70,11 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+Assets/Art/Eemeli/Character/Testi\!EläKäytä/TestiScripta/TestiEläKäytä.cs
+
 *.cs
 Assets/Scripts/Jaakko/PlayerMovement.cs
 Assets/Scripts/Jaakko/PlayerMovement.cs.meta
 *.meta
+
