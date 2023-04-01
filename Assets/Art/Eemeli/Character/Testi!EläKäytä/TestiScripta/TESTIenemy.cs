@@ -24,13 +24,14 @@ public class TESTIenemy : MonoBehaviour
     public LayerMask playerLayer;
 
     public Animator anim;
-
-
+    public GameObject hpbar;
+    public HealthBarScript hpscript;
 
     private void Start()
     {
         health = 4;
         moveSpeed = 7;
+        hpscript.SetMaxHealth(health); 
     }
 
     void Update()
@@ -50,10 +51,10 @@ public class TESTIenemy : MonoBehaviour
     public void TakeDamage()
     {
         health -= 1;
+        hpscript.SetHealth(health);
         //play sound, animation, particles
         if (health <= 0)
         {
-            //Vector3 thisPoss = this.gameObject.transform.position;
             Instantiate(soulPrefab, this.transform.position + (transform.up * -2), Quaternion.identity);
             //death sound, animation, particles
             Destroy(this.gameObject);
