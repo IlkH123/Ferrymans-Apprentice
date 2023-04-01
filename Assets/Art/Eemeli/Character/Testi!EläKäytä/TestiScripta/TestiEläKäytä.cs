@@ -15,12 +15,14 @@ public class TestiEläKäytä : MonoBehaviour
     float moveSpeed;
     float currentSpeed;
     float jumpForce;
-    private bool isGround;
-    private bool attacking = false;
-    public bool blocking = false;
-    private bool doubleJump = false;
-    private bool soulClose = false;
-    private bool collecting = false;
+    [SerializeField] public bool isGround;
+    [SerializeField] public bool attacking = false;
+    [SerializeField] public bool blocking = false;
+    [SerializeField] public bool doubleJump = false;
+    [SerializeField] public bool soulClose = false;
+    [SerializeField] public bool collecting = false;
+    [SerializeField] public bool isCrouching = false;
+    [SerializeField] public bool isMoving = false;
 
     private int health;
     private int maxHealth;
@@ -50,8 +52,9 @@ public class TestiEläKäytä : MonoBehaviour
     {
         if (!collecting && !attacking)
         {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
+            
+            if (Input.GetKey(KeyCode.Mouse0) && !blocking)
+            {   
                 Attack();
             }
 
@@ -70,13 +73,47 @@ public class TestiEläKäytä : MonoBehaviour
                 CollectSoul();
             }
 
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                animator.SetTrigger("powerAttack"); //because i can xd
+            }
 
+            if (Input.GetKeyDown(KeyCode.Space) && isGround)
+            {
+                rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+                animator.SetBool("isCrouching", false);
+                animator.SetBool("isCrouchWalking", false);
+                animator.SetTrigger("jump");
+                isGround = false;
+                StartCoroutine(DoubleJumpTimer());
+                //sound
+            }
+            if (Input.GetKeyDown(KeyCode.Space) && doubleJump)
+            {
+                doubleJump = false;
+                rb.AddForce(transform.up * jumpForce * 0.5f, ForceMode2D.Impulse);
+                animator.SetTrigger("doubleJump");
+            }
         }
 
-        if(Input.GetKeyDown(KeyCode.C))
+        if(Input.GetKey(KeyCode.S) && !collecting && isGround)
         {
-
+            isCrouching = true;
+            animator.SetBool("isCrouching", true);
+            currentSpeed = moveSpeed * 0.75f;
         }
+        else
+        {
+            isCrouching = false;
+            animator.SetBool("isCrouching", false);
+            currentSpeed = moveSpeed;
+            if(isMoving)
+            {
+                animator.SetBool("isCrouchWalking", false);
+                animator.SetBool("isWalking", true);
+            }
+        }
+
     }
     void FixedUpdate()
     {
@@ -88,71 +125,44 @@ public class TestiEläKäytä : MonoBehaviour
             {
                 this.transform.eulerAngles = new Vector3(0, 0, 0); // Flipped
                 rb.transform.Translate(new Vector3(1, 0, 0) * currentSpeed * Time.deltaTime);
+                isMoving = true;
+                if (isCrouching)
+                {
+                    animator.SetBool("isCrouchWalking", true);
+                }
+                else
+                {
+                    animator.SetFloat("walkMultiplier", 1f);
+                    animator.SetBool("isWalking", true);
+                }
 
-                animator.SetFloat("walkMultiplier", 1f);
-                animator.SetBool("isWalking", true);
                 //sound
             }
             else if (Input.GetKey(KeyCode.A))
             {
 
                 this.transform.eulerAngles = new Vector3(0, 180, 0);
-                rb.transform.Translate(new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime);
+                rb.transform.Translate(new Vector3(1, 0, 0) * currentSpeed * Time.deltaTime);
+                isMoving = true;
+                if (isCrouching)
+                {
+                    animator.SetBool("isCrouchWalking", true);
+                }
+                else
+                {
+                    animator.SetFloat("walkMultiplier", -1f);
+                    animator.SetBool("isWalking", true);
+                }
 
-
-                animator.SetFloat("walkMultiplier", -1f);
-                animator.SetBool("isWalking", true);
                 //sound
             }
             else
             {
+                isMoving = false;
                 animator.SetBool("isWalking", false);
-            }
-
-            if (Input.GetKey(KeyCode.Space) && isGround)
-            {
-                rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-                animator.SetTrigger("jump");
-                isGround = false;
-                StartCoroutine(DoubleJumpTimer());
-                //sound
-            }
-            if (Input.GetKeyDown(KeyCode.Space) && doubleJump)
-            {
-                doubleJump = false;
-                rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-                animator.SetTrigger("jump");
+                animator.SetBool("isCrouchWalking", false);
             }
         }
-
-        else if (Input.GetKey(KeyCode.A))
-        {
-
-            this.transform.eulerAngles = new Vector3(0, 180, 0);
-            rb.transform.Translate(new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime);
-
-
-            animator.SetFloat("walkMultiplier", -1f);
-            animator.SetBool("isWalking", true);
-            //sound
-        }
-
-        else
-        {
-            animator.SetBool("isWalking", false);
-        }
-
-        if (Input.GetKey(KeyCode.Space) && isGround)
-        {
-            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-            animator.SetTrigger("jump");
-            isGround = false;
-            //sound
-           
-        }
-
-        
-
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -187,7 +197,7 @@ public class TestiEläKäytä : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Soul"))
+        if (collision.gameObject.CompareTag("Soul") && !collecting)
         {
             soulClose = false;
             currentSoul = null;
@@ -198,7 +208,11 @@ public class TestiEläKäytä : MonoBehaviour
     {
         blocking = false;
         attacking = true;
-        animator.SetTrigger("attack");
+        if(isCrouching)
+        {
+            animator.SetTrigger("crouchAttack");
+        }
+        else animator.SetTrigger("attack");
 
         //sound
     }
@@ -240,9 +254,9 @@ public class TestiEläKäytä : MonoBehaviour
     IEnumerator CollectReset()
     {
         yield return new WaitForSeconds(2f);
-        collecting = false;
-        currentSpeed = moveSpeed;
         Destroy(currentSoul.gameObject);
+        collecting = false;
+        currentSpeed = moveSpeed;   
         souls += 1;
         Debug.Log(souls);
     }
@@ -251,9 +265,9 @@ public class TestiEläKäytä : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         doubleJump = true;
+        yield return new WaitForSeconds(0.8f);
+        doubleJump = false;
     }
-
-
 }
 
 
