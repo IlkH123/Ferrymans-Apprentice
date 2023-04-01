@@ -10,6 +10,7 @@ public class TestiEläKäytä : MonoBehaviour
     public Animator animator;
     public TestiEläkäytä2 testi;
     private GameObject currentSoul;
+    public Healthbar hpBar;
 
 
     float moveSpeed;
@@ -58,7 +59,7 @@ public class TestiEläKäytä : MonoBehaviour
                 Attack();
             }
 
-            if (Input.GetKey(KeyCode.Mouse1))
+            if (Input.GetKey(KeyCode.Mouse1) && isGround)
             {
                 Block();
             }
