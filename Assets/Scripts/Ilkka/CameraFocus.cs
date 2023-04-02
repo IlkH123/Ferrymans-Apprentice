@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class CameraFocus : MonoBehaviour
 {
+    [SerializeField]
+    PlayerController controller;
     Camera camera;
     Vector3 cameraRestPoint;
     float defaultZ;
@@ -86,6 +88,10 @@ public class CameraFocus : MonoBehaviour
 
     void Start()
     {
+        if (controller == null)
+        {
+            controller = GetComponent<PlayerController>();
+        }
         //Initializing the camera object and the values
         camera = Camera.main;
         defaultZ = camera.transform.position.z;
@@ -125,7 +131,7 @@ public class CameraFocus : MonoBehaviour
                defaultZ);
             camera.transform.position = cameraRestPoint;
         }
-        if (newY > marginUp && !groundCheck)
+        if (newY > marginUp && !controller.player_actions.groundCheck)
         {
             cameraRestPoint = new Vector3(
                cameraRestPoint.x,
@@ -133,7 +139,7 @@ public class CameraFocus : MonoBehaviour
                defaultZ);
             camera.transform.position = cameraRestPoint;
         }
-        if (newY < marginDown || groundCheck)
+        if (newY < marginDown || controller.player_actions.groundCheck)
         {
             cameraRestPoint = new Vector3(
                cameraRestPoint.x,
