@@ -12,6 +12,7 @@ TagManager:
   - Collectible
   - Health
   - Soul
+  - Staff
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,7 @@ TagManager:
   - Interactable Objects
   - Ground
   - PlayerLayer
-  - 
-  - 
+  - PostProcess
   - 
   - 
   - 
