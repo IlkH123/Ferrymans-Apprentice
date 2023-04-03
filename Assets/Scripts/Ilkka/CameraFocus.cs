@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class CameraFocus : MonoBehaviour
 {
-    [SerializeField]
-    //PlayerController controller;
     Camera camera;
     Vector3 cameraRestPoint;
     float defaultZ;
@@ -16,10 +14,10 @@ public class CameraFocus : MonoBehaviour
     // Margin points in viewport coordinates,
     // values range from 0 to 1 where 0,0 is bottom left
     // and 1,1 is top right
-    Vector2 ViewportTopLeft = new Vector2(0.35f, 0.65f);
-    Vector2 ViewportTopRight = new Vector2(0.65f, 0.65f);
-    Vector2 ViewportBottomLeft = new Vector2(0.35f, 0.3f);
-    Vector2 ViewportBottomRight = new Vector2(0.65f, 0.3f);
+    Vector2 ViewportTopLeft = new Vector2(0.25f, 0.75f);
+    Vector2 ViewportTopRight = new Vector2(0.75f, 0.75f);
+    Vector2 ViewportBottomLeft = new Vector2(0.25f, 0.3f);
+    Vector2 ViewportBottomRight = new Vector2(0.75f, 0.3f);
 
     // These are for the screenspace conversions of the viewport coordinates
     Vector2 edgeVectorTopLeft, 
@@ -63,21 +61,21 @@ public class CameraFocus : MonoBehaviour
                 break;
             case 2:
                 //Forest 1-1
-                spawnpoint = new Vector3(-20, 1, 0);
+                spawnpoint = new Vector3(-20, 6, 0);
                 gameObject.transform.position = spawnpoint;
                 reinitializeCameraObject(spawnpoint);
                 Debug.Log("entered Forest 1-1");
                 break;
             case 3:
                 //Forest 1-2
-                spawnpoint = new Vector3(0, 1, 0);
+                spawnpoint = new Vector3(0, 6, 0);
                 gameObject.transform.position = spawnpoint;
                 reinitializeCameraObject(spawnpoint);
                 Debug.Log("entered Forest 1-2");
                 break;
             case 4:
                 //Forest 1-3
-                spawnpoint = new Vector3(0, 1, 0);
+                spawnpoint = new Vector3(0, 6, 0);
                 gameObject.transform.position = spawnpoint;
                 reinitializeCameraObject(spawnpoint);
                 Debug.Log("entered Forest 1-3");
@@ -86,20 +84,16 @@ public class CameraFocus : MonoBehaviour
 
     }
 
-    //void Start()
-    //{
-    //    if (controller == null)
-    //    {
-    //        controller = GetComponent<PlayerController>();
-    //    }
-    //    //Initializing the camera object and the values
-    //    camera = Camera.main;
-    //    defaultZ = camera.transform.position.z;
-    //    marginBottomFloor = camera.transform.position.y;
-    //    cameraRestPoint = camera.transform.position;
-    //    DontDestroyOnLoad(this);
+    void Start()
+    {
+        //Initializing the camera object and the values
+        camera = Camera.main;
+        defaultZ = camera.transform.position.z;
+        marginBottomFloor = camera.transform.position.y;
+        cameraRestPoint = camera.transform.position;
+        DontDestroyOnLoad(this);
 
-    //}
+    }
 
     
     // Update is called once per frame
@@ -131,27 +125,27 @@ public class CameraFocus : MonoBehaviour
                defaultZ);
             camera.transform.position = cameraRestPoint;
         }
-        //if (newY > marginUp && !controller.player_actions.groundCheck)
-        //{
-        //    cameraRestPoint = new Vector3(
-        //       cameraRestPoint.x,
-        //       (cameraRestPoint.y + (newY - marginUp)),
-        //       defaultZ);
-        //    camera.transform.position = cameraRestPoint;
-        //}
-        //if (newY < marginDown || controller.player_actions.groundCheck)
-        //{
-        //    cameraRestPoint = new Vector3(
-        //       cameraRestPoint.x,
-        //       ((cameraRestPoint.y + (newY - marginDown)) + 2.5f),
-        //       defaultZ);
-        ////    if (cameraRestPoint.y > marginBottomFloor)
-        ////    {
-        //    camera.transform.position = cameraRestPoint;
-        ////    }
-        //}
+        if (newY > marginUp && !groundCheck)
+        {
+            cameraRestPoint = new Vector3(
+               cameraRestPoint.x,
+               (cameraRestPoint.y + (newY - marginUp)),
+               defaultZ);
+            camera.transform.position = cameraRestPoint;
+        }
+        if (newY < marginDown || groundCheck)
+        {
+            cameraRestPoint = new Vector3(
+               cameraRestPoint.x,
+               ((cameraRestPoint.y + (newY - marginDown)) + 2.5f),
+               defaultZ);
+        //    if (cameraRestPoint.y > marginBottomFloor)
+        //    {
+            camera.transform.position = cameraRestPoint;
+        //    }
+        }
 
-        
+        // camera.transform.position = new Vector3(newX, newY, defaultZ);
         UpdateMargins();
         //OnDrawGizmos();
 
