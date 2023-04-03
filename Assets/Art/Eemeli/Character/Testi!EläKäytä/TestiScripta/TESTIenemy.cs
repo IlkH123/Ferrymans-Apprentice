@@ -26,6 +26,7 @@ public class TESTIenemy : MonoBehaviour
     public Animator anim;
     public GameObject hpbar;
     //public HealthBarScript hpscript;
+    //^^If you fix this the functionality should return
 
     private void Start()
     {
