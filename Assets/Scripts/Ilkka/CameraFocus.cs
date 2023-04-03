@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class CameraFocus : MonoBehaviour
 {
     [SerializeField]
-    PlayerController controller;
+    //PlayerController controller;
     Camera camera;
     Vector3 cameraRestPoint;
     float defaultZ;
@@ -86,20 +86,20 @@ public class CameraFocus : MonoBehaviour
 
     }
 
-    void Start()
-    {
-        if (controller == null)
-        {
-            controller = GetComponent<PlayerController>();
-        }
-        //Initializing the camera object and the values
-        camera = Camera.main;
-        defaultZ = camera.transform.position.z;
-        marginBottomFloor = camera.transform.position.y;
-        cameraRestPoint = camera.transform.position;
-        DontDestroyOnLoad(this);
+    //void Start()
+    //{
+    //    if (controller == null)
+    //    {
+    //        controller = GetComponent<PlayerController>();
+    //    }
+    //    //Initializing the camera object and the values
+    //    camera = Camera.main;
+    //    defaultZ = camera.transform.position.z;
+    //    marginBottomFloor = camera.transform.position.y;
+    //    cameraRestPoint = camera.transform.position;
+    //    DontDestroyOnLoad(this);
 
-    }
+    //}
 
     
     // Update is called once per frame
@@ -131,25 +131,25 @@ public class CameraFocus : MonoBehaviour
                defaultZ);
             camera.transform.position = cameraRestPoint;
         }
-        if (newY > marginUp && !controller.player_actions.groundCheck)
-        {
-            cameraRestPoint = new Vector3(
-               cameraRestPoint.x,
-               (cameraRestPoint.y + (newY - marginUp)),
-               defaultZ);
-            camera.transform.position = cameraRestPoint;
-        }
-        if (newY < marginDown || controller.player_actions.groundCheck)
-        {
-            cameraRestPoint = new Vector3(
-               cameraRestPoint.x,
-               ((cameraRestPoint.y + (newY - marginDown)) + 2.5f),
-               defaultZ);
-        //    if (cameraRestPoint.y > marginBottomFloor)
-        //    {
-            camera.transform.position = cameraRestPoint;
-        //    }
-        }
+        //if (newY > marginUp && !controller.player_actions.groundCheck)
+        //{
+        //    cameraRestPoint = new Vector3(
+        //       cameraRestPoint.x,
+        //       (cameraRestPoint.y + (newY - marginUp)),
+        //       defaultZ);
+        //    camera.transform.position = cameraRestPoint;
+        //}
+        //if (newY < marginDown || controller.player_actions.groundCheck)
+        //{
+        //    cameraRestPoint = new Vector3(
+        //       cameraRestPoint.x,
+        //       ((cameraRestPoint.y + (newY - marginDown)) + 2.5f),
+        //       defaultZ);
+        ////    if (cameraRestPoint.y > marginBottomFloor)
+        ////    {
+        //    camera.transform.position = cameraRestPoint;
+        ////    }
+        //}
 
         
         UpdateMargins();

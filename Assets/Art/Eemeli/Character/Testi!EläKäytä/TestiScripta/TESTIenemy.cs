@@ -25,13 +25,13 @@ public class TESTIenemy : MonoBehaviour
 
     public Animator anim;
     public GameObject hpbar;
-    public HealthBarScript hpscript;
+    //public HealthBarScript hpscript;
 
     private void Start()
     {
         health = 4;
         moveSpeed = 7;
-        hpscript.SetMaxHealth(health); 
+        //hpscript.SetMaxHealth(health); 
     }
 
     void Update()
@@ -51,7 +51,7 @@ public class TESTIenemy : MonoBehaviour
     public void TakeDamage()
     {
         health -= 1;
-        hpscript.SetHealth(health);
+        //hpscript.SetHealth(health);
         //play sound, animation, particles
         if (health <= 0)
         {
