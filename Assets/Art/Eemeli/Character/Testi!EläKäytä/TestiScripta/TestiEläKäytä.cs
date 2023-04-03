@@ -16,6 +16,9 @@ public class TestiEläKäytä : MonoBehaviour
     float moveSpeed;
     float currentSpeed;
     float jumpForce;
+    float colliderYstand = 28;
+    float colliderYcrouch;
+    float colliderX = 6.5f;
     [SerializeField] public bool isGround;
     [SerializeField] public bool attacking = false;
     [SerializeField] public bool blocking = false;
@@ -24,6 +27,7 @@ public class TestiEläKäytä : MonoBehaviour
     [SerializeField] public bool collecting = false;
     [SerializeField] public bool isCrouching = false;
     [SerializeField] public bool isMoving = false;
+    [SerializeField] public bool canStand = true;
 
     private int health;
     private int maxHealth;
@@ -48,7 +52,12 @@ public class TestiEläKäytä : MonoBehaviour
         souls = 0;
         currentSpeed = moveSpeed;
     }
-
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Vector3 direction = transform.TransformDirection(Vector3.up) * 4.2f;
+        Gizmos.DrawRay(this.transform.position + (transform.up * 2), direction);
+    }
     void Update()
     {
         if (!collecting && !attacking)
@@ -99,15 +108,31 @@ public class TestiEläKäytä : MonoBehaviour
 
         if(Input.GetKey(KeyCode.S) && !collecting && isGround)
         {
+            bc.enabled = false;
             isCrouching = true;
             animator.SetBool("isCrouching", true);
             currentSpeed = moveSpeed * 0.75f;
+            RaycastHit hit;
+            if (Physics.Raycast(this.transform.position + (transform.up * 2), Vector3.up, out hit, 4.2f)) // EI TOIMI
+            {
+                if(hit.collider.CompareTag("Ground"))
+                {
+                    canStand = false;
+                    Debug.Log("Collider above");
+                }     
+                else canStand = true;
+            }
         }
         else
         {
-            isCrouching = false;
-            animator.SetBool("isCrouching", false);
-            currentSpeed = moveSpeed;
+            if(canStand)
+            {
+                bc.enabled = true;
+                isCrouching = false;
+                animator.SetBool("isCrouching", false);
+                currentSpeed = moveSpeed;
+            }
+
             if(isMoving)
             {
                 animator.SetBool("isCrouchWalking", false);
