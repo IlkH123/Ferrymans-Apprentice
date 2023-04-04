@@ -20,12 +20,15 @@ public class TESTIArrow : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            var playerScript = collision.GetComponent<TestiEläKäytä>();
-            if(!playerScript.blocking)
+            if(collision.GetType() == typeof(BoxCollider2D))
             {
-                playerScript.TakeDamage();
+                var playerScript = collision.GetComponent<TestiEläKäytä>();
+                if (!playerScript.blocking)
+                {
+                    playerScript.TakeDamage();
+                }
+                Destroy(this.gameObject);
             }
-            Destroy(this.gameObject);
         }
     }
 }

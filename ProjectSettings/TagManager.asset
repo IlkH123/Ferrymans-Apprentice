@@ -8,8 +8,11 @@ TagManager:
   - Wall
   - Door
   - Enemy
+  - Hand
+  - Collectible
   - Health
   - Soul
+  - Staff
   layers:
   - Default
   - TransparentFX
@@ -18,9 +21,9 @@ TagManager:
   - Water
   - UI
   - Interactable Objects
+  - Ground
   - PlayerLayer
-  - 
-  - 
+  - PostProcess
   - 
   - 
   - 
