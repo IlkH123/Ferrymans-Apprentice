@@ -7,7 +7,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     PlayerController controller;
     internal float xMove, yMove;
-    internal bool attacking, blocking, interacting, leftMove, rightMove, upMove, downMove;
+    internal bool attacking, blocking, interacting, leftMove, rightMove, upMove, crouching, holdingShift;
 
     // Start is called before the first frame update
     void Start()
@@ -39,13 +39,23 @@ public class PlayerInput : MonoBehaviour
         }
 
         //Right Mouse
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             blocking = true;
         }
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             blocking = false;
+        }
+
+        //holding shift
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            holdingShift = true;
+        }
+        if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            holdingShift = false;
         }
 
         //Interaction
@@ -82,11 +92,11 @@ public class PlayerInput : MonoBehaviour
         //Crouch
         if (Input.GetKeyDown(KeyCode.S))
         {
-            downMove = true;
+            crouching = true;
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
-            downMove = false;
+            crouching = false;
         }
 
         //Jump

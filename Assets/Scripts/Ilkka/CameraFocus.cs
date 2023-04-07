@@ -5,10 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class CameraFocus : MonoBehaviour
 {
+    [SerializeField]
+    PlayerController controller;
     Camera camera;
     Vector3 cameraRestPoint;
+    internal bool fixedCamera, followPlayer; 
+    // if you want a static camera, use fixedCamera=false && followPlayer=false, you will need to set the position manually though
+    // If you need the camera to follow the player for debug reasons use fixedCamera=true && followPlayer=true
+    // the default is fixedCamera=false && followPlayer=false
     float defaultZ;
-    public bool groundCheck;
     int currentSceneIndex;
 
     // Margin points in viewport coordinates,
@@ -57,10 +62,14 @@ public class CameraFocus : MonoBehaviour
         {
             case 1:
                 //Intro + Cabin
+                fixedCamera = true;
+                followPlayer = false;
                 Debug.Log("entered Forest Cabin");
                 break;
             case 2:
                 //Forest 1-1
+                fixedCamera= false;
+                followPlayer = false;
                 spawnpoint = new Vector3(-20, 6, 0);
                 gameObject.transform.position = spawnpoint;
                 reinitializeCameraObject(spawnpoint);
@@ -68,6 +77,8 @@ public class CameraFocus : MonoBehaviour
                 break;
             case 3:
                 //Forest 1-2
+                fixedCamera= false;
+                followPlayer = false;
                 spawnpoint = new Vector3(0, 6, 0);
                 gameObject.transform.position = spawnpoint;
                 reinitializeCameraObject(spawnpoint);
@@ -75,6 +86,8 @@ public class CameraFocus : MonoBehaviour
                 break;
             case 4:
                 //Forest 1-3
+                fixedCamera = false;
+                followPlayer = false;
                 spawnpoint = new Vector3(0, 6, 0);
                 gameObject.transform.position = spawnpoint;
                 reinitializeCameraObject(spawnpoint);
@@ -91,6 +104,8 @@ public class CameraFocus : MonoBehaviour
         defaultZ = camera.transform.position.z;
         marginBottomFloor = camera.transform.position.y;
         cameraRestPoint = camera.transform.position;
+        // Currently this is the script that keep the player prefab around. Not sure if that should be the case,
+        // could be more intuitive somewhere else
         DontDestroyOnLoad(this);
 
     }
@@ -108,49 +123,68 @@ public class CameraFocus : MonoBehaviour
         marginUp= edgeVectorTopLeft.y;
         marginDown= edgeVectorBottomLeft.y;
 
-
-        if( newX < marginLeft)
+        if (!fixedCamera)
         {
-            cameraRestPoint = new Vector3(
-                (cameraRestPoint.x + (newX - marginLeft)), 
-                cameraRestPoint.y, 
-                defaultZ);
-            camera.transform.position = cameraRestPoint;
-        }
-        if(newX > marginRight)
+            if (newX < marginLeft)
+            {
+                pushLeft();
+            }
+            if (newX > marginRight)
+            {
+                pushRight();
+            }
+            if (newY > marginUp)
+            {
+               pushUp();
+            }
+            if (newY < marginDown && !controller.player_actions.groundCheck)
+            {
+                pushDown();
+            }
+        } 
+        else if (fixedCamera && followPlayer)
         {
-            cameraRestPoint = new Vector3(
-               (cameraRestPoint.x + (newX - marginRight)),
-               cameraRestPoint.y,
-               defaultZ);
-            camera.transform.position = cameraRestPoint;
-        }
-        if (newY > marginUp && !groundCheck)
-        {
-            cameraRestPoint = new Vector3(
-               cameraRestPoint.x,
-               (cameraRestPoint.y + (newY - marginUp)),
-               defaultZ);
-            camera.transform.position = cameraRestPoint;
-        }
-        if (newY < marginDown || groundCheck)
-        {
-            cameraRestPoint = new Vector3(
-               cameraRestPoint.x,
-               ((cameraRestPoint.y + (newY - marginDown)) + 2.5f),
-               defaultZ);
-        //    if (cameraRestPoint.y > marginBottomFloor)
-        //    {
-            camera.transform.position = cameraRestPoint;
-        //    }
+            camera.transform.position = new Vector3(newX, newY, defaultZ);
         }
 
-        // camera.transform.position = new Vector3(newX, newY, defaultZ);
         UpdateMargins();
-        //OnDrawGizmos();
 
     }
-
+    void pushLeft()
+    {
+        cameraRestPoint = new Vector3(
+                    (cameraRestPoint.x + (newX - marginLeft)),
+                    cameraRestPoint.y,
+                    defaultZ);
+        camera.transform.position = cameraRestPoint;
+    }
+    void pushRight()
+    {
+        cameraRestPoint = new Vector3(
+                   (cameraRestPoint.x + (newX - marginRight)),
+                   cameraRestPoint.y,
+                   defaultZ);
+        camera.transform.position = cameraRestPoint;
+    }
+    void pushUp()
+    {
+        cameraRestPoint = new Vector3(
+                  cameraRestPoint.x,
+                  (cameraRestPoint.y + (newY - marginUp)),
+                  defaultZ);
+        camera.transform.position = cameraRestPoint;
+    }
+    void pushDown()
+    {
+        cameraRestPoint = new Vector3(
+                   cameraRestPoint.x,
+                   ((cameraRestPoint.y + (newY - marginDown)) + 2.5f),
+                   defaultZ);
+        //    if (cameraRestPoint.y > marginBottomFloor)
+        //    {
+        camera.transform.position = cameraRestPoint;
+        //    }
+    }
     void UpdateMargins()
     {
         // Conversion from viewport coordinates to screenspace coordinates
@@ -159,14 +193,12 @@ public class CameraFocus : MonoBehaviour
         edgeVectorTopRight = Camera.main.ViewportToWorldPoint(ViewportTopRight);
         edgeVectorBottomRight = Camera.main.ViewportToWorldPoint(ViewportBottomRight);
     }
-
     void reinitializeCameraObject(Vector3 newfocus)
     {
         camera = Camera.main;
         camera.transform.position = newfocus;
 
     }
-
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

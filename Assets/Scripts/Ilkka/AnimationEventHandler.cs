@@ -24,6 +24,14 @@ public class AnimationEventHandler : MonoBehaviour
     {
         animator.SetBool("isWalking", state);
     }
+    internal void isCrouching(bool state)
+    {
+        animator.SetBool("isCrouching", state);
+    }
+    internal void isCrouchWalking(bool state)
+    {
+        animator.SetBool("isCrouchWalking", state);
+    }
 
     //Using this method will look funny because it will work like a setter
     //when you pass the input boolean through it, it matches the if statement
@@ -37,7 +45,7 @@ public class AnimationEventHandler : MonoBehaviour
     //reference, this SHOULD work
     // TODO: find a solution that is more specific (explicit?)
 
-internal void walkMultiplier(float direction)
+    internal void walkMultiplier(float direction)
     {
         switch (direction)
         {
@@ -77,5 +85,17 @@ internal void walkMultiplier(float direction)
     {
         animator.SetBool("blocking", state);
     }
-    // See comments on line 28-38
+    internal void powerAttack()
+    {
+        animator.SetTrigger("powerAttack");
+    }
+    internal void doubleJump()
+    {
+        animator.SetTrigger("doubleJump");
+    }
+    internal void crouchAttack()
+    {
+        animator.SetTrigger("crouchAttack");
+    }
+    
 }

@@ -12,13 +12,15 @@ public class PlayerController : MonoBehaviour
     float moveSpeed, jumpForce, jumpTimer, jumpDelay;
     
     [SerializeField]
-    PlayerInput player_input;
+    internal PlayerInput player_input;
     [SerializeField]
-    AnimationEventHandler anim_EH;
+    internal AnimationEventHandler anim_EH;
     [SerializeField]
     internal PlayerActions player_actions;
     [SerializeField]
     internal Rigidbody2D rb;
+    [SerializeField]
+    internal StaffEventRelay staff_relay;
     internal BoxCollider2D player_bc2D;
     Animator player_animator;
     CameraFocus camFoc;
@@ -50,42 +52,64 @@ public class PlayerController : MonoBehaviour
         if (!player_input.interacting && !player_input.blocking)
         {
             //Horizontal movement
-            //most of this crap should be moved to player_actions
-            if (player_input.leftMove)
-            {
-                player_actions.MovePlayer(player_input.xMove);
-                anim_EH.walkMultiplier(player_input.xMove);
-                anim_EH.isWalking(player_input.leftMove);
-            }
-            else if (player_input.rightMove)
-            {
-                player_actions.MovePlayer(player_input.xMove);
-                anim_EH.walkMultiplier(player_input.xMove);
-                anim_EH.isWalking(player_input.rightMove);
-            }
-            else if (!player_input.leftMove && !player_input.rightMove)
-            {
-                anim_EH.walkMultiplier(player_input.xMove);
-                anim_EH.isWalking(player_input.rightMove);
-            }
             
-            // Jumping
-            if (player_input.upMove)
+            // Most of the movement code that calls the animation handler was moved to player_actions, but this solution
+            // still resets the animations here if the player os not moving. Not sure how well I like it, standard is not consistent
+            // TODO: find a solution where the animation resetting is also done in the player_actions
+
+            //crouching?
+            if (player_input.crouching)
             {
-                if(player_actions.groundCheck && player_actions.jumpCheck)
+                // turn on the crouch animation
+                anim_EH.isCrouching(player_input.crouching);
+                
+                //move player
+                if (player_input.leftMove)
                 {
-                    player_actions.Jump(player_input.yMove);
+                    player_actions.MovePlayer(player_input.xMove);
                 }
-                else if (player_actions.jumpCount < 2)
+                else if (player_input.rightMove)
                 {
-                    player_actions.Jump(player_input.yMove);
+                    player_actions.MovePlayer(player_input.xMove);
+                }
+                else if (!player_input.leftMove && !player_input.rightMove)
+                {
+                    //if not moving, then turn off the movement animations
+                    anim_EH.walkMultiplier(player_input.xMove);
+                    anim_EH.isCrouchWalking(player_input.rightMove);
+                }
+            }
+            else
+            {
+                //turn off crouch animation
+                anim_EH.isCrouching(player_input.crouching);
+
+                //move player
+                if (player_input.leftMove)
+                {
+                    player_actions.MovePlayer(player_input.xMove);
+                }
+                else if (player_input.rightMove)
+                {
+                    player_actions.MovePlayer(player_input.xMove);
+                }
+                else if (!player_input.leftMove && !player_input.rightMove)
+                {
+                    //if not moving, turn off the movement animations
+                    anim_EH.walkMultiplier(player_input.xMove);
+                    anim_EH.isWalking(player_input.rightMove);
                 }
             }
 
-            //crouch, not done yet
-            if (player_input.downMove)
+            // Jumping
+            if (player_input.upMove)
             {
+                if((player_actions.groundCheck && player_actions.jumpCheck) || player_actions.jumpCheck && player_actions.jumpCount < 2)
+                {
+                    player_actions.Jump();
+                }
             }
+
         }
 
         //Attacking
@@ -97,9 +121,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Blocking
-        //This has a problem where it will always send some call to the anim event handler
-        // TODO: find a solution where it only sends one call when needed.
-        if (player_input.blocking)
+        if (player_input.blocking && !player_actions.blocking)
         {
             player_actions.Block(player_input.blocking);
             
