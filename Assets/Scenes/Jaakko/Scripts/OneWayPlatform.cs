@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OneWayPlatform : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            Rigidbody2D playerRigidbody = other.GetComponent<Rigidbody2D>();
+            if (playerRigidbody.velocity.y <= 0)
+            {
+                playerRigidbody.gravityScale = 0;
+                Invoke("RestoreGravity", 0.5f);
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void RestoreGravity()
     {
-        
+        GetComponentInParent<Rigidbody2D>().gravityScale = 1;
     }
 }
