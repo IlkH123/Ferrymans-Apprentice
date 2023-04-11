@@ -1140,9 +1140,10 @@ GameObject:
   - component: {fileID: 8483829560639645530}
   - component: {fileID: 8483829560639645531}
   - component: {fileID: 1018870989}
+  - component: {fileID: 9203023934405715920}
   m_Layer: 0
   m_Name: Staff
-  m_TagString: Untagged
+  m_TagString: Staff
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1231,6 +1232,19 @@ CircleCollider2D:
   m_Offset: {x: 1.125548, y: 12.945392}
   serializedVersion: 2
   m_Radius: 3.1669939
+--- !u!114 &9203023934405715920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8483829560639645533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fbaa71b5a69744409b63831580d2088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 5277875278842639236}
 --- !u!1 &8483829560671936924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2154,7 +2168,7 @@ Animator:
   m_GameObject: {fileID: 8788551798662044342}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6e0bef15fecb4d543825b6f09aedcbb5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 452583ae22aba104e987f106aa1cb772, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2219,6 +2233,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  crouchAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4843378383228186019}
+        m_TargetAssemblyTypeName: PlayerActions, Assembly-CSharp
+        m_MethodName: AttackReset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  powerAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4843378383228186019}
+        m_TargetAssemblyTypeName: PlayerActions, Assembly-CSharp
+        m_MethodName: AttackReset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   block:
     m_PersistentCalls:
       m_Calls:
@@ -2264,6 +2308,8 @@ GameObject:
   - component: {fileID: 2668283397726265774}
   - component: {fileID: 5635949350405560131}
   - component: {fileID: 4843378383228186019}
+  - component: {fileID: 2156083548674164785}
+  - component: {fileID: 5922879869663291598}
   m_Layer: 7
   m_Name: Player_Prefab_Main
   m_TagString: Player
@@ -2350,6 +2396,7 @@ MonoBehaviour:
   anim_EH: {fileID: 5635949350405560131}
   player_actions: {fileID: 4843378383228186019}
   rb: {fileID: 8483829561083968360}
+  staff_relay: {fileID: 9203023934405715920}
 --- !u!114 &2668283397726265774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2393,3 +2440,37 @@ MonoBehaviour:
   rb: {fileID: 0}
   player_bc2D: {fileID: 0}
   groundCheck: 0
+--- !u!114 &2156083548674164785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979641863957089338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210f219b503fd7246b7785ebf3a49f01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  marginLeft: 0
+  marginRight: 0
+  marginUp: 0
+  marginDown: 0
+  marginBottomFloor: 0
+  newX: 0
+  newY: 0
+  restPointX: 0
+  restPointY: 0
+--- !u!114 &5922879869663291598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979641863957089338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71e9454c2a520142be54ecbcaf790c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
