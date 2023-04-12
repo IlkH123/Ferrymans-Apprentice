@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
 
     //Set at start(), uncomment if you need to see the numbers in the editor
-    //[SerializeField]
+    [SerializeField]
     float moveSpeed, jumpForce, jumpTimer, jumpDelay;
     
     [SerializeField]
@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     int health, souls;
     private GameObject currentSoul;
+
 
     void Start()
     {
