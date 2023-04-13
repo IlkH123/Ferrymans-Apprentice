@@ -126,23 +126,31 @@ public class ChestCollectible : MonoBehaviour
     private Animator Chest; // Animator component of the chest
     private bool isOpen = false; // Flag to check if the chest is open
     private bool isNearby = false; // Flag to check if the player is nearby
-
+    
     // Start is called before the first frame update
     void Start()
     {
         Chest = GetComponent<Animator>();
         Chest.SetBool("ChestOpen", isOpen);
         instructionText.SetActive(false); // Hide the instruction text by default
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isNearby && !isOpen && Input.GetKeyDown(KeyCode.E))
+        if (isNearby && !isOpen && Input.GetKeyDown(KeyCode.F))
         {
             // Open the chest
             Chest.SetBool("ChestOpen", true);
             isOpen = true;
+            // Play the opening sound
+            AudioSource audioSource = GetComponent<AudioSource>();
+            if (audioSource != null && audioSource.clip != null)
+            {
+                audioSource.PlayOneShot(audioSource.clip);
+            }
+
 
             // Spawn a random collectible
             int randomIndex = Random.Range(0, collectibles.Length);
