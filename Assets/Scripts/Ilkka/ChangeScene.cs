@@ -3,13 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    [SerializeField] private int nextSceneID;
+    [SerializeField] internal int nextSceneID;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             SceneManager.LoadScene(nextSceneID);
         }
+    }
+
+    public void changeScene()
+    {
+        SceneManager.LoadScene(nextSceneID);
     }
 }

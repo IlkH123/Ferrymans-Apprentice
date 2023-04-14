@@ -19,10 +19,10 @@ public class CameraFocus : MonoBehaviour
     // Margin points in viewport coordinates,
     // values range from 0 to 1 where 0,0 is bottom left
     // and 1,1 is top right
-    Vector2 ViewportTopLeft = new Vector2(0.25f, 0.75f);
-    Vector2 ViewportTopRight = new Vector2(0.75f, 0.75f);
-    Vector2 ViewportBottomLeft = new Vector2(0.25f, 0.3f);
-    Vector2 ViewportBottomRight = new Vector2(0.75f, 0.3f);
+    Vector2 ViewportTopLeft = new Vector2(0.35f, 0.75f);
+    Vector2 ViewportTopRight = new Vector2(0.65f, 0.75f);
+    Vector2 ViewportBottomLeft = new Vector2(0.35f, 0.3f);
+    Vector2 ViewportBottomRight = new Vector2(0.65f, 0.3f);
 
     // These are for the screenspace conversions of the viewport coordinates
     Vector2 edgeVectorTopLeft, 
@@ -92,6 +92,13 @@ public class CameraFocus : MonoBehaviour
                 gameObject.transform.position = spawnpoint;
                 reinitializeCameraObject(spawnpoint);
                 Debug.Log("entered Forest 1-3");
+                break;
+            default: 
+                // ugly default code. camera follows player if the scene is unknown and there won't be a specific spawn point
+                fixedCamera= false;
+                followPlayer= true;
+                spawnpoint = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, defaultZ);
+                reinitializeCameraObject(spawnpoint);
                 break;
         }
 
