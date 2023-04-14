@@ -124,7 +124,7 @@ public class PlayerActions : MonoBehaviour
     internal void Attack()
     {
         attacking = true;
-        controller.staff_relay.toggleCollider();
+        controller.staff_relay.toggleColliderOn();
 
         if (controller.player_input.crouching)
         {
@@ -152,7 +152,7 @@ public class PlayerActions : MonoBehaviour
     public void AttackReset()
     {
         attacking = false;
-        controller.staff_relay.toggleCollider();
+        controller.staff_relay.toggleColliderOff();
         //Debug.Log("Attack Reset");
     }
     internal void Block(bool state)
