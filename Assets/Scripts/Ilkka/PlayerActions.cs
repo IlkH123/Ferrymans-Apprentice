@@ -51,11 +51,13 @@ public class PlayerActions : MonoBehaviour
             rb.velocity = new Vector2(direction * crouchedSpeed, rb.velocity.y);
             if (controller.player_input.leftMove)
             {
+                controller.player_audio.playSound(audioClip.WALK);
                 anim_EH.walkMultiplier(controller.player_input.xMove);
                 anim_EH.isCrouchWalking(controller.player_input.leftMove);
             }
             else if (controller.player_input.rightMove)
             {
+                controller.player_audio.playSound(audioClip.WALK);
                 anim_EH.walkMultiplier(controller.player_input.xMove);
                 anim_EH.isCrouchWalking(controller.player_input.rightMove);
             }
@@ -73,11 +75,13 @@ public class PlayerActions : MonoBehaviour
 
             if (controller.player_input.leftMove)
             {
+                controller.player_audio.playSound(audioClip.WALK);
                 anim_EH.walkMultiplier(controller.player_input.xMove);
                 anim_EH.isWalking(controller.player_input.leftMove);
             }
             else if (controller.player_input.rightMove)
             {
+                controller.player_audio.playSound(audioClip.WALK);
                 anim_EH.walkMultiplier(controller.player_input.xMove);
                 anim_EH.isWalking(controller.player_input.rightMove);
             }
@@ -97,6 +101,7 @@ public class PlayerActions : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             anim_EH.jump();
+            controller.player_audio.playSound(audioClip.JUMP);
             jumpCheck = false;
             groundCheck = false;
             jumpCount++;
@@ -106,6 +111,7 @@ public class PlayerActions : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0 );
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             anim_EH.doubleJump();
+            controller.player_audio.playSound(audioClip.GRUNT);
             jumpCheck = false;
             jumpCount++;
         }
@@ -114,7 +120,6 @@ public class PlayerActions : MonoBehaviour
             StartCoroutine(JumpDelay());
         }
     }
-    //The doublejump is broken. TODO: fix this once we have a dash animation
 
     IEnumerator JumpDelay()
     {
@@ -125,6 +130,8 @@ public class PlayerActions : MonoBehaviour
     {
         attacking = true;
         controller.staff_relay.toggleColliderOn();
+        controller.player_audio.playSound(audioClip.CANE);
+
 
         if (controller.player_input.crouching)
         {

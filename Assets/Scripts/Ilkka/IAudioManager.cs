@@ -16,7 +16,7 @@ public enum audioClip
 }
 public interface IAudioManager
 {
-    void playSound(audioClip clip);
+    public void playSound(audioClip clip);
 
 }
 

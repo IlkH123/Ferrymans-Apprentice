@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerSFX : MonoBehaviour, IAudioManager
 {
     [SerializeField]
+    internal PlayerController controller;
+    [SerializeField]
     internal AudioSource walking, jump, caneWhoosh, grunt;
 
-    void IAudioManager.playSound(audioClip clip)
+    public void playSound(audioClip clip)
     {
         switch(clip)
         {
@@ -51,6 +53,7 @@ public class PlayerSFX : MonoBehaviour, IAudioManager
         }
     }
     // Start is called before the first frame update
+
     void Start()
     {
         
