@@ -5,7 +5,7 @@ public class IntroScriptName : MonoBehaviour
 {
     public Image introImage; // Reference to the image object
 
-    private float scrollSpeed = 60f; // Speed of scrolling
+    private float scrollSpeed = 80f; // Speed of scrolling
 
     private void Update()
     {

@@ -5167,6 +5167,7 @@ RectTransform:
   - {fileID: 2034541651}
   - {fileID: 1824801277}
   - {fileID: 687720818}
+  - {fileID: 586572629}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5201,6 +5202,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introImage: {fileID: 1824801275}
+--- !u!1 &366356692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 366356694}
+  - component: {fileID: 366356693}
+  m_Layer: 0
+  m_Name: Intro scene controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &366356693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366356692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698a01eecffb00142b184b353094f9ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressAnyKeyText: {fileID: 586572626}
+  nextSceneName: Main Menu Jaakko
+  delayBeforePrompt: 20
+--- !u!4 &366356694
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366356692}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -167.01372, y: 10.092572, z: -0.5216196}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &515304294
 GameObject:
   m_ObjectHideFlags: 0
@@ -5447,6 +5495,141 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &586572626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 586572629}
+  - component: {fileID: 586572628}
+  - component: {fileID: 586572627}
+  m_Layer: 5
+  m_Name: PressAnyKey
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &586572627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586572626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: PRESS ANY KEY TO CONTINUE
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 2566914047
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.59607846}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 12
+  m_fontSizeBase: 12
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &586572628
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586572626}
+  m_CullTransparentMesh: 1
+--- !u!224 &586572629
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586572626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 327138780}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -102.8}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &687720817
 GameObject:
   m_ObjectHideFlags: 0
@@ -5845,8 +6028,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -310.09}
-  m_SizeDelta: {x: 955.1, y: 50}
+  m_AnchoredPosition: {x: 0, y: -556.5}
+  m_SizeDelta: {x: 1095.9146, y: 46.6359}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2034541652
 MonoBehaviour:
@@ -5885,55 +6068,55 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'In the dark and mystical woods,
+  m_text: 'IN THE DARK AND MYSTICAL WOODS,
 
-    Where magic and shadows interlude,
+    WHERE MAGIC AND SHADOWS INTERLUDE,
 
-    Lives
-    the Ferryman''s Apprentice,
+    LIVES
+    THE FERRYMAN''S APPRENTICE,
 
-    Whose destined to battle and collect the possessed.
-
-
-
-    The
-    storm''s howl awakens the old man,
-
-    Who sets out with a cane in hand,
-
-    To
-    redeem the damned souls,
-
-    Possessed and bound to their monstrous roles.
+    WHOSE DESTINED TO BATTLE AND COLLECT THE POSSESSED.
 
 
 
-    His
-    journey is long and his path is steep,
+    THE
+    STORM''S HOWL AWAKENS THE OLD MAN,
 
-    But his spirit is strong and his
-    will is deep,
+    WHO SETS OUT WITH A CANE IN HAND,
 
-    For in his quest, he shall prove,
+    TO
+    REDEEM THE DAMNED SOULS,
 
-    That the light of goodness
-    will always behoove.
-
+    POSSESSED AND BOUND TO THEIR MONSTROUS ROLES.
 
 
-    A hero of the woods, his bravery immense,
 
-    For
-    in his hands, lies the power to break the devil''s bands,
+    HIS
+    JOURNEY IS LONG AND HIS PATH IS STEEP,
 
-    And free the souls
-    to journey beyond, to eternity''s lands.
+    BUT HIS SPIRIT IS STRONG AND HIS
+    WILL IS DEEP,
 
-    The future that lies beyond, shall
-    rest in his hands.
+    FOR IN HIS QUEST, HE SHALL PROVE,
+
+    THAT THE LIGHT OF GOODNESS
+    WILL ALWAYS BEHOOVE.
 
 
-    He is the...
+
+    A HERO OF THE WOODS, HIS BRAVERY IMMENSE,
+
+    FOR
+    IN HIS HANDS, LIES THE POWER TO BREAK THE DEVIL''S BANDS,
+
+    AND FREE THE SOULS
+    TO JOURNEY BEYOND, TO ETERNITY''S LANDS.
+
+    THE FUTURE THAT LIES BEYOND, SHALL
+    REST IN HIS HANDS.
+
+
+
 
 '
   m_isRightToLeft: 0
@@ -5962,8 +6145,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
