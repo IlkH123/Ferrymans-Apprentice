@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 167326706301951284}
   m_Layer: 0
-  m_Name: Soul_Prefab 1
+  m_Name: Soul_Prefab_Main
   m_TagString: Soul
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,6 +39,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 167326706301951284}
     m_Modifications:
+    - target: {fileID: 1021515681, guid: fb9bee6e6c46ee448a32c14b7095ab4f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 168196596264936143, guid: fb9bee6e6c46ee448a32c14b7095ab4f, type: 3}
       propertyPath: m_Name
       value: Soul_Children
@@ -121,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5968603345578234483, guid: fb9bee6e6c46ee448a32c14b7095ab4f, type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -0.000549078
+      value: -0.00055003166
       objectReference: {fileID: 0}
     - target: {fileID: 5968603345578234483, guid: fb9bee6e6c46ee448a32c14b7095ab4f, type: 3}
       propertyPath: m_Bounds.m_Center.y
@@ -129,15 +133,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5968603345578234483, guid: fb9bee6e6c46ee448a32c14b7095ab4f, type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 1.3169109
+      value: 1.3169099
       objectReference: {fileID: 0}
     - target: {fileID: 7537596444516267540, guid: fb9bee6e6c46ee448a32c14b7095ab4f, type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -0.0000011920929
+      value: -0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 7537596444516267540, guid: fb9bee6e6c46ee448a32c14b7095ab4f, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.010543346
+      value: 0.0105443
       objectReference: {fileID: 0}
     - target: {fileID: 7537596444516267540, guid: fb9bee6e6c46ee448a32c14b7095ab4f, type: 3}
       propertyPath: m_Bounds.m_Extent.x

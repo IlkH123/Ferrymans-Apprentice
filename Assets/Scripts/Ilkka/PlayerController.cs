@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     internal Rigidbody2D rb;
     [SerializeField]
     internal StaffEventRelay staff_relay;
+    [SerializeField]
+    internal PlayerSFX player_audio;
     internal BoxCollider2D player_bc2D;
     Animator player_animator;
     CameraFocus camFoc;

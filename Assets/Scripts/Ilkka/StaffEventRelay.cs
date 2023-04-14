@@ -25,10 +25,33 @@ public class StaffEventRelay : MonoBehaviour
         
     }
 
-    internal void toggleCollider()
+    internal void toggleColliderOn()
     {
-        Debug.Log("Toggled");
-        if (cc.enabled) { cc.enabled = false; }
-        else if (!cc.enabled) { cc.enabled = true; }
+        if (!cc.enabled) { 
+            cc.enabled = true; 
+        Debug.Log("Toggled on");
+        }
     }
+    internal void toggleColliderOff()
+    {
+        
+        if (cc.enabled) { 
+            cc.enabled = false;
+            Debug.Log("Toggled off");
+        }
+        
+    }
+
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.tag == "Enemy")
+    //    {
+    //        // Since we do not know what this hits in advance, I made an interface which all the controller can inherit
+    //        // so we can abstract the syntax
+    //        IController enemy_control = other.GetComponentInParent<IController>();
+    //        Debug.Log("Found and hit type Enemy");
+
+    //    }
+        
+    //}
 }
