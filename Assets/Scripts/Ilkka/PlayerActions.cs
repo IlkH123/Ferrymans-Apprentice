@@ -204,6 +204,9 @@ public class PlayerActions : MonoBehaviour
         //    player_animator.SetBool("playerDead", true);
         //}
     }
+
+    // Why isn't this in the controller? This one fits here, the ther one fits better into the controller,
+    // fuck if I know
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")

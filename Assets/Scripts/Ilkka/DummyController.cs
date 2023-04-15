@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DummyController : MonoBehaviour, IController
+public class DummyController : Controller, IController
 {
     [SerializeField]
     BoxCollider2D text_trigger;
@@ -49,7 +49,7 @@ public class DummyController : MonoBehaviour, IController
         }
     }
 
-    void IController.handleCollision()
+    void IController.handleCollision(Collision2D collision)
     {
         
     }

@@ -79,7 +79,7 @@ public class AnimationEventHandler : MonoBehaviour
     }
     internal void playerDead()
     {
-
+        animator.SetBool("playerDead", true);
     }
     internal void blocking(bool state)
     {

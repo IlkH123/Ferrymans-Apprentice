@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Controller, IController
 {
 
     //Set at start(), uncomment if you need to see the numbers in the editor
-    [SerializeField]
+    //[SerializeField]
     float moveSpeed, jumpForce, jumpTimer, jumpDelay;
+
+    [SerializeField]
+    int health, maxHealth, souls;
+    private GameObject currentSoul;
     
     [SerializeField]
     internal PlayerInput player_input;
@@ -27,8 +31,6 @@ public class PlayerController : MonoBehaviour
     Animator player_animator;
     CameraFocus camFoc;
 
-    int health, souls;
-    private GameObject currentSoul;
 
 
     void Start()
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
         
         //Auxiliary values
         health = 5;
+        maxHealth = 5;
         souls = 0;
     }
 
@@ -143,6 +146,43 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Arrow")) 
+        {
+            //Debug.Log("Arrow collision!");
+            other.gameObject.GetComponent<EnemyMissile>().destroyImmediate();
+            if (!player_input.blocking)
+            {
+                resolveDamage();
+            }
+        }
+    }
+
+    public void resolveDamage()
+    {
+        if (health > 1)
+        {
+            player_actions.TakeDamage();
+            anim_EH.takeDamage();
+            health--;
+        }
+        else if (health <= 1)
+        {
+            anim_EH.playerDead();
+            health--;
+        }
+    }
+
+    public override void handleCollision(Collision2D collision) 
+    {
+        if (!player_input.blocking)
+        {
+            resolveDamage();
+        }
+    }
+
 
     //void OnGUI()
     //{

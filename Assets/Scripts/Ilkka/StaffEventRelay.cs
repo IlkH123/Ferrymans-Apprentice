@@ -29,7 +29,7 @@ public class StaffEventRelay : MonoBehaviour
     {
         if (!cc.enabled) { 
             cc.enabled = true; 
-        Debug.Log("Toggled on");
+        //Debug.Log("Toggled on");
         }
     }
     internal void toggleColliderOff()
@@ -37,21 +37,20 @@ public class StaffEventRelay : MonoBehaviour
         
         if (cc.enabled) { 
             cc.enabled = false;
-            Debug.Log("Toggled off");
+            //Debug.Log("Toggled off");
         }
         
     }
 
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.tag == "Enemy")
-    //    {
-    //        // Since we do not know what this hits in advance, I made an interface which all the controller can inherit
-    //        // so we can abstract the syntax
-    //        IController enemy_control = other.GetComponentInParent<IController>();
-    //        Debug.Log("Found and hit type Enemy");
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Enemy")
+        {
+            // This is stupid and should be done with collision and not trigger, but don't have the time to fix it.
+            // TODO: get rid of this terrible garbage
+            CollisionRelay enemy_relay = other.GetComponentInParent<CollisionRelay>();
+            enemy_relay.relayTriggerEvent();
+        }
 
-    //    }
-        
-    //}
+    }
 }

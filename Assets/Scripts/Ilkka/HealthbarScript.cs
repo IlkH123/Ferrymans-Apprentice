@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class HealthbarScript : MonoBehaviour
 {
     [SerializeField]
-    int current, max, min;
+    int current, max;
+    const int min = 0;
     [SerializeField]
     Slider state;
 
@@ -14,13 +15,21 @@ public class HealthbarScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        current = 5;
-        max = 5;
-        min = 0;
         isDead = false;
     }
-
-    void damageTaken(int dmg)
+    internal void setValues(int newCurrent, int newMax) 
+    { 
+        current = newCurrent;
+        max = newMax;
+        state.maxValue = max;
+        state.value = current;
+    }
+    internal void setHealth(int value) 
+    { 
+        current = value; 
+        state.value = value;
+    }
+    internal void damageTaken(int dmg)
     {
         if (state.value - dmg < min)
         {
@@ -33,7 +42,7 @@ public class HealthbarScript : MonoBehaviour
         }
     }
 
-    void healingTaken(int dmg)
+    internal void healingTaken(int dmg)
     {
         state.value += dmg;
         if (state.value > max)

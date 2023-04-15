@@ -9,8 +9,9 @@ public class CameraFocus : MonoBehaviour
     PlayerController controller;
     Camera camera;
     Vector3 cameraRestPoint;
+    [SerializeField]
     internal bool fixedCamera, followPlayer; 
-    // if you want a static camera, use fixedCamera=false && followPlayer=false, you will need to set the position manually though
+    // if you want a static camera, use fixedCamera=true && followPlayer=false, you will need to set the position manually though
     // If you need the camera to follow the player for debug reasons use fixedCamera=true && followPlayer=true
     // the default is fixedCamera=false && followPlayer=false
     float defaultZ;
@@ -30,9 +31,9 @@ public class CameraFocus : MonoBehaviour
         edgeVectorBottomLeft,
         edgeVectorBottomRight;
 
-    [SerializeField]
+    //[SerializeField]
     float marginLeft, marginRight, marginUp, marginDown, marginBottomFloor;
-    [SerializeField]
+    //[SerializeField]
     float newX, newY, restPointX, restPointY;
 
     //Next two categories are a delegate method for the SceneManager namespace,
@@ -57,6 +58,8 @@ public class CameraFocus : MonoBehaviour
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         Debug.Log("The scene index is " + currentSceneIndex);
         Vector3 spawnpoint;
+        camera = Camera.main;
+        defaultZ = camera.transform.position.z;
 
         switch (currentSceneIndex)
         {
@@ -130,6 +133,8 @@ public class CameraFocus : MonoBehaviour
         marginUp= edgeVectorTopLeft.y;
         marginDown= edgeVectorBottomLeft.y;
 
+        UpdateMargins();
+
         if (!fixedCamera)
         {
             if (newX < marginLeft)
@@ -153,9 +158,6 @@ public class CameraFocus : MonoBehaviour
         {
             camera.transform.position = new Vector3(newX, newY, defaultZ);
         }
-
-        UpdateMargins();
-
     }
     void pushLeft()
     {
@@ -203,7 +205,7 @@ public class CameraFocus : MonoBehaviour
     void reinitializeCameraObject(Vector3 newfocus)
     {
         camera = Camera.main;
-        camera.transform.position = newfocus;
+        camera.transform.position = new Vector3(newfocus.x, newfocus.y, defaultZ);
 
     }
     public void OnDrawGizmos()

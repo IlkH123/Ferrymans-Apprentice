@@ -29,5 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Jaakko/Forest 1-2.unity
     guid: 7c546f62763baa548b8a75159f3bdffa
-
+  - enabled: 1
+    path: Assets/Scenes/Ilkka/IlkkaTestiScene.unity
+    guid: f7c88efea6f76494bb35c5111dfbd545
   m_configObjects: {}

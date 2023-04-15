@@ -163,6 +163,9 @@ public class ChestCollectible : MonoBehaviour
                 collectibleItem.Merge();
             }
 
+            //Turn off the instruction text
+            instructionText.SetActive(false);
+
         }
     }
 
