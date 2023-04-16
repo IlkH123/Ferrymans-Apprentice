@@ -13,7 +13,7 @@ TagManager:
   - Health
   - Soul
   - Staff
-  - Arrow
+  - Spawn
   layers:
   - Default
   - TransparentFX
