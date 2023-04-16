@@ -9,4 +9,6 @@ public interface IController
 {
     void handleCollision(Collision2D collision);
     void handleTrigger();
+    void handleTrigger(Collider2D collision);
+    void handleTrigger(Collider2D collision, GameObject collidingObject);
 }

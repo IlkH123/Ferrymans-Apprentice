@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -116.16}
+  m_AnchoredPosition: {x: 247.9, y: 67.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &508409562165647325
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 3439329279
   m_fontColor: {r: 1, g: 1, b: 1, a: 0.8}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -245,7 +245,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2554220349060102451, guid: bfd3feee556a7c645881cf586c1c2475, type: 3}
       propertyPath: m_Name
-      value: Instruction 1 placeholder
+      value: Instruction 1 placeholder Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554220349060102451, guid: bfd3feee556a7c645881cf586c1c2475, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2854872959285471925, guid: bfd3feee556a7c645881cf586c1c2475, type: 3}
       propertyPath: m_Enabled
@@ -257,11 +261,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8671015156808033384, guid: bfd3feee556a7c645881cf586c1c2475, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.7792
+      value: 11.254624
       objectReference: {fileID: 0}
     - target: {fileID: 8671015156808033384, guid: bfd3feee556a7c645881cf586c1c2475, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.6608
+      value: 1.6415372
       objectReference: {fileID: 0}
     - target: {fileID: 8671015156808033384, guid: bfd3feee556a7c645881cf586c1c2475, type: 3}
       propertyPath: m_LocalPosition.z

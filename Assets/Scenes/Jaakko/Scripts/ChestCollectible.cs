@@ -171,7 +171,7 @@ public class ChestCollectible : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !isOpen)
         {
             // The player is nearby
             isNearby = true;

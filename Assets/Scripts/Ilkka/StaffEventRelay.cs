@@ -48,6 +48,9 @@ public class StaffEventRelay : MonoBehaviour
         {
             // This is stupid and should be done with collision and not trigger, but don't have the time to fix it.
             // TODO: get rid of this terrible garbage
+            // Update: I don't remember how this works anymore
+
+            Debug.Log("Staff relay");
             CollisionRelay enemy_relay = other.GetComponentInParent<CollisionRelay>();
             enemy_relay.relayTriggerEvent();
         }

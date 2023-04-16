@@ -183,7 +183,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: de100660107318747a9bfbf08f32ca52, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -268,7 +268,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 7
   m_Sprite: {fileID: 431873816174690698, guid: 83a5532bcc2245d488eb4a9b339af4ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -300,8 +300,8 @@ MonoBehaviour:
   - {fileID: 8483829560402498136}
   - {fileID: 8483829559962151622}
   m_Bounds:
-    m_Center: {x: 3.0007224, y: 3.6803627, z: 0}
-    m_Extent: {x: 4.743302, y: 3.21909, z: 0}
+    m_Center: {x: 3.0007246, y: 3.6803617, z: 0}
+    m_Extent: {x: 4.743302, y: 3.2190905, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -537,7 +537,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 491174887130469894, guid: 83a5532bcc2245d488eb4a9b339af4ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -569,8 +569,8 @@ MonoBehaviour:
   - {fileID: 8483829560295429876}
   - {fileID: 8483829561260520263}
   m_Bounds:
-    m_Center: {x: -0.75543046, y: -0.013559818, z: 0}
-    m_Extent: {x: 2.2219915, y: 7.024336, z: 0}
+    m_Center: {x: -0.7553568, y: -0.013620377, z: 0}
+    m_Extent: {x: 2.2218451, y: 7.024394, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -808,7 +808,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_Sprite: {fileID: -74282957911398070, guid: 83a5532bcc2245d488eb4a9b339af4ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -836,7 +836,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 8483829560671936925}
   m_Bounds:
-    m_Center: {x: 0.00142169, y: -0.16350222, z: 0}
+    m_Center: {x: 0.0014243126, y: -0.16350222, z: 0}
     m_Extent: {x: 3.3931065, y: 5.1544704, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -992,7 +992,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8483829560295429879}
-  m_LocalRotation: {x: 0, y: 0, z: 0.039489742, w: 0.99922}
+  m_LocalRotation: {x: 0, y: 0, z: 0.03952573, w: 0.9992186}
   m_LocalPosition: {x: 1.4564868, y: -0.83889884, z: 0}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1056,7 +1056,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8483829560402498139}
-  m_LocalRotation: {x: 0, y: 0, z: 0.82570523, w: 0.56410176}
+  m_LocalRotation: {x: 0, y: 0, z: 0.8257052, w: 0.5641019}
   m_LocalPosition: {x: 1.0308754, y: -0.0000006940102, z: 0}
   m_LocalScale: {x: 0.99999964, y: 0.99999964, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1204,7 +1204,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 86a214183e4449f4e99474fbbcc8dc9a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1330,7 +1330,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8483829560730278696}
-  m_LocalRotation: {x: 0, y: 0, z: -0.005209165, w: 0.9999864}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0052745705, w: 0.9999862}
   m_LocalPosition: {x: 5.097501, y: -0.0000013893804, z: 0}
   m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1522,7 +1522,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8483829561161616973}
-  m_LocalRotation: {x: 0, y: 0, z: 0.0007830545, w: 0.9999997}
+  m_LocalRotation: {x: 0, y: 0, z: 0.00078314764, w: 0.9999997}
   m_LocalPosition: {x: 5.2438784, y: 0.00000071360756, z: 0}
   m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1669,7 +1669,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -3480490767020025317, guid: 83a5532bcc2245d488eb4a9b339af4ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1700,8 +1700,8 @@ MonoBehaviour:
   - {fileID: 8483829560339925580}
   - {fileID: 8483829559669002438}
   m_Bounds:
-    m_Center: {x: 0.14824593, y: -0.29596615, z: 1.6482028e-12}
-    m_Extent: {x: 1.6758333, y: 6.9414024, z: 5.8443233e-12}
+    m_Center: {x: 0.14824474, y: -0.29596615, z: 1.6482028e-12}
+    m_Extent: {x: 1.6758307, y: 6.9414024, z: 5.8443233e-12}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1875,7 +1875,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -3774563358503446148, guid: 83a5532bcc2245d488eb4a9b339af4ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1908,8 +1908,8 @@ MonoBehaviour:
   - {fileID: 8483829561260520263}
   - {fileID: 8483829560145498401}
   m_Bounds:
-    m_Center: {x: 0.07164526, y: 0.1871934, z: 0}
-    m_Extent: {x: 2.6690764, y: 6.9336057, z: 0}
+    m_Center: {x: 0.07164359, y: 0.18719244, z: 0}
+    m_Extent: {x: 2.6690798, y: 6.933605, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1986,7 +1986,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: -2428642796640319886, guid: 83a5532bcc2245d488eb4a9b339af4ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2016,7 +2016,7 @@ MonoBehaviour:
   - {fileID: 8483829561480458654}
   - {fileID: 8483829561260520263}
   m_Bounds:
-    m_Center: {x: -0.52351665, y: -0.08643818, z: 0}
+    m_Center: {x: -0.5235152, y: -0.086438656, z: 0}
     m_Extent: {x: 4.9676633, y: 7.377554, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -2394,10 +2394,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48dea1160a7083442a201f0b5e9c6bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  jumpForce: 0
-  jumpTimer: 0
-  jumpDelay: 0
+  health: 0
+  maxHealth: 0
+  souls: 0
   player_input: {fileID: 2668283397726265774}
   anim_EH: {fileID: 5635949350405560131}
   player_actions: {fileID: 4843378383228186019}
@@ -2477,6 +2476,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  fixedCamera: 0
+  followPlayer: 0
 --- !u!114 &5922879869663291598
 MonoBehaviour:
   m_ObjectHideFlags: 0

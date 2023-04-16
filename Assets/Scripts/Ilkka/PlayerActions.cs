@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     [SerializeField]
-    PlayerController controller;
+    internal PlayerController controller;
     [SerializeField]                
     AnimationEventHandler anim_EH;  // Don't really wnat this here but some animation calls are better done here
     [SerializeField]
@@ -16,7 +16,7 @@ public class PlayerActions : MonoBehaviour
     BoxCollider2D player_bc2D;
     float moveSpeed, crouchedSpeed, jumpForce, jumpDelay;
     internal int jumpCount;
-    internal bool jumpCheck, blocking, attacking, interacting, soulClose;
+    internal bool jumpCheck, blocking, attacking, interacting, soulClose, collectibleClose;
     //soulClose should probably be in input
     [SerializeField]
     internal bool groundCheck;
@@ -51,18 +51,24 @@ public class PlayerActions : MonoBehaviour
             rb.velocity = new Vector2(direction * crouchedSpeed, rb.velocity.y);
             if (controller.player_input.leftMove)
             {
-                controller.player_audio.playSound(audioClip.WALK);
                 anim_EH.walkMultiplier(controller.player_input.xMove);
                 anim_EH.isCrouchWalking(controller.player_input.leftMove);
+                if (groundCheck)
+                {
+                    controller.player_audio.playSound(audioClip.WALK);
+                }
             }
             else if (controller.player_input.rightMove)
             {
-                controller.player_audio.playSound(audioClip.WALK);
                 anim_EH.walkMultiplier(controller.player_input.xMove);
                 anim_EH.isCrouchWalking(controller.player_input.rightMove);
+                if (groundCheck)
+                {
+                    controller.player_audio.playSound(audioClip.WALK);
+                }
             }
             //this is probably superfluous, since stopping the animations are still in the controller
-            
+
             //else if (!controller.player_input.leftMove && !controller.player_input.rightMove)
             //{
             //    anim_EH.walkMultiplier(controller.player_input.xMove);
@@ -75,15 +81,21 @@ public class PlayerActions : MonoBehaviour
 
             if (controller.player_input.leftMove)
             {
-                controller.player_audio.playSound(audioClip.WALK);
                 anim_EH.walkMultiplier(controller.player_input.xMove);
                 anim_EH.isWalking(controller.player_input.leftMove);
+                if (groundCheck)
+                {
+                    controller.player_audio.playSound(audioClip.WALK);
+                }
             }
             else if (controller.player_input.rightMove)
             {
-                controller.player_audio.playSound(audioClip.WALK);
                 anim_EH.walkMultiplier(controller.player_input.xMove);
                 anim_EH.isWalking(controller.player_input.rightMove);
+                if (groundCheck)
+                {
+                    controller.player_audio.playSound(audioClip.WALK);
+                }
             }
             //this is probably superfluous, since stopping the animations are still in the controller
             
@@ -111,7 +123,7 @@ public class PlayerActions : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0 );
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             anim_EH.doubleJump();
-            controller.player_audio.playSound(audioClip.GRUNT);
+            controller.player_audio.playSound(audioClip.JUMP);
             jumpCheck = false;
             jumpCount++;
         }
@@ -173,11 +185,28 @@ public class PlayerActions : MonoBehaviour
         //All interactions from the E key go here
         // TODO: implement branching logic for other
         // interactions besides collecting souls
-        interacting = true;
+        Debug.Log("Interaction action trigger");
 
-        anim_EH.collectSoul();
-        StartCoroutine(CollectReset());
-        //Debug.Log("Interaction action trigger");
+        if (soulClose)
+        {
+            Debug.Log("Bottling souls");
+            Destroy(controller.currentSoul);
+            interacting = true;
+            soulClose = false;
+            anim_EH.collectSoul();
+            controller.setSoulCount(controller.souls + 1);
+            StartCoroutine(CollectReset());
+        }
+        else if (collectibleClose)
+        {
+            Debug.Log("GULP!");
+            Destroy(controller.currentCollectible);
+            interacting = true;
+            collectibleClose = false;
+            controller.setHealth(controller.maxHealth);
+            StartCoroutine(CollectReset());
+        }
+
 
         //particles, sound, animation for soul 
     }

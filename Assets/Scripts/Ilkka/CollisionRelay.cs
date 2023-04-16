@@ -17,9 +17,14 @@ public class CollisionRelay : MonoBehaviour
         controller.handleCollision(collision);
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        controller.handleTrigger(collision);
+    }
+
     public void relayTriggerEvent() 
     {
         controller.handleTrigger();
-        Debug.Log("Made it to the relay");
+        Debug.Log("Pass through the relay");
     }
 }

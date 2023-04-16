@@ -32,7 +32,7 @@ public class EnemyController : Controller, IController
     {
         health = 4;
         moveSpeed = 7;
-        hpscript.setValues(health, health); 
+        hpscript.setMaxHealth(health); 
     }
 
     void Update()
@@ -49,7 +49,7 @@ public class EnemyController : Controller, IController
         // does more damage
 
         health -= 1;
-        hpscript.damageTaken(1);
+        hpscript.setHealth(health);
         //play sound, animation, particles
         if (health <= 0)
         {
@@ -131,7 +131,8 @@ public class EnemyController : Controller, IController
     }
 
     public override void handleTrigger() 
-    { 
+    {
+        Debug.Log("Made it to the enemy controller");
         TakeDamage();
     }
 

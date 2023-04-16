@@ -12,21 +12,17 @@ public class PlayerController : Controller, IController
     float moveSpeed, jumpForce, jumpTimer, jumpDelay;
 
     [SerializeField]
-    int health, maxHealth, souls;
-    private GameObject currentSoul;
+    internal int health, maxHealth, souls;
+    internal GameObject currentSoul, currentCollectible;
     
-    [SerializeField]
-    internal PlayerInput player_input;
-    [SerializeField]
-    internal AnimationEventHandler anim_EH;
-    [SerializeField]
-    internal PlayerActions player_actions;
-    [SerializeField]
-    internal Rigidbody2D rb;
-    [SerializeField]
-    internal StaffEventRelay staff_relay;
-    [SerializeField]
-    internal PlayerSFX player_audio;
+    [SerializeField] internal PlayerInput player_input;
+    [SerializeField] internal AnimationEventHandler anim_EH;
+    [SerializeField] internal PlayerActions player_actions;
+    [SerializeField] internal Rigidbody2D rb;
+    [SerializeField] internal HealthbarScript healthbar;
+    [SerializeField] internal SoulCounter soul_counter;
+    [SerializeField] internal StaffEventRelay staff_relay;
+    [SerializeField] internal PlayerSFX player_audio;
     internal BoxCollider2D player_bc2D;
     Animator player_animator;
     CameraFocus camFoc;
@@ -42,8 +38,9 @@ public class PlayerController : Controller, IController
         camFoc = GetComponent<CameraFocus>();
         
         //Auxiliary values
-        health = 5;
         maxHealth = 5;
+        health = 5;
+        healthbar.setMaxHealth(health);
         souls = 0;
     }
 
@@ -55,7 +52,7 @@ public class PlayerController : Controller, IController
     void Update()
     {
         //Movement when not interacting or blocking
-        if (!player_input.interacting && !player_input.blocking)
+        if (!player_input.interacting && !player_actions.interacting && !player_input.blocking && !player_actions.blocking)
         {
             //Horizontal movement
             
@@ -147,6 +144,34 @@ public class PlayerController : Controller, IController
         
     }
 
+    public bool IsCollectibleNull()
+    {
+        if (currentCollectible == null) { return true;}
+        else return false;
+    }
+
+    public bool IsSoulNull()
+    {
+        if (currentSoul == null) { return true; }
+        else return false;
+    }
+
+    public void setHealth(int newHealth)
+    {
+        health = newHealth;
+        healthbar.setHealth(health);
+    }
+    public void setMaxHealth(int newHealth)
+    {
+        health = newHealth;
+        healthbar.setMaxHealth(health);
+    }
+    public void setSoulCount(int newSouls)
+    {
+        souls = newSouls;
+        soul_counter.setSoulCount(souls);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Arrow")) 
@@ -167,11 +192,13 @@ public class PlayerController : Controller, IController
             player_actions.TakeDamage();
             anim_EH.takeDamage();
             health--;
+            healthbar.setHealth(health);
         }
         else if (health <= 1)
         {
             anim_EH.playerDead();
             health--;
+            healthbar.setHealth(health);
         }
     }
 
@@ -180,6 +207,20 @@ public class PlayerController : Controller, IController
         if (!player_input.blocking)
         {
             resolveDamage();
+        }
+    }
+
+    public override void handleTrigger(Collider2D collision, GameObject collidingObject)
+    {
+        if (collidingObject.CompareTag("Soul"))
+        {
+            currentSoul = collidingObject;
+            player_actions.soulClose = true;
+        }
+        if (collidingObject.CompareTag("Health"))
+        {
+            currentCollectible = collidingObject;
+            player_actions.collectibleClose = true;
         }
     }
 

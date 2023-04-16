@@ -61,15 +61,17 @@ public class CameraFocus : MonoBehaviour
         camera = Camera.main;
         defaultZ = camera.transform.position.z;
 
+        // This garbage breaks every time the scene index or the name of the scene changes
+
         switch (currentSceneIndex)
         {
-            case 1:
+            case 3:
                 //Intro + Cabin
                 fixedCamera = true;
                 followPlayer = false;
                 Debug.Log("entered Forest Cabin");
                 break;
-            case 2:
+            case 4:
                 //Forest 1-1
                 fixedCamera= false;
                 followPlayer = false;
@@ -78,24 +80,28 @@ public class CameraFocus : MonoBehaviour
                 reinitializeCameraObject(spawnpoint);
                 Debug.Log("entered Forest 1-1");
                 break;
-            case 3:
-                //Forest 1-2
-                fixedCamera= false;
-                followPlayer = false;
-                spawnpoint = new Vector3(0, 6, 0);
-                gameObject.transform.position = spawnpoint;
-                reinitializeCameraObject(spawnpoint);
-                Debug.Log("entered Forest 1-2");
-                break;
-            case 4:
-                //Forest 1-3
-                fixedCamera = false;
-                followPlayer = false;
-                spawnpoint = new Vector3(0, 6, 0);
-                gameObject.transform.position = spawnpoint;
-                reinitializeCameraObject(spawnpoint);
-                Debug.Log("entered Forest 1-3");
-                break;
+
+            //  SCENES NOT IMPLEMENTED
+            //  the build index numbers are probably wrong too
+            //case 3:
+            //    //Forest 1-2
+            //    fixedCamera= false;
+            //    followPlayer = false;
+            //    spawnpoint = new Vector3(0, 6, 0);
+            //    gameObject.transform.position = spawnpoint;
+            //    reinitializeCameraObject(spawnpoint);
+            //    Debug.Log("entered Forest 1-2");
+            //    break;
+            //case 4:
+            //    //Forest 1-3
+            //    fixedCamera = false;
+            //    followPlayer = false;
+            //    spawnpoint = new Vector3(0, 6, 0);
+            //    gameObject.transform.position = spawnpoint;
+            //    reinitializeCameraObject(spawnpoint);
+            //    Debug.Log("entered Forest 1-3");
+            //    break;
+
             default: 
                 // ugly default code. camera follows player if the scene is unknown and there won't be a specific spawn point
                 fixedCamera= false;

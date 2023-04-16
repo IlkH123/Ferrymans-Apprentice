@@ -8,5 +8,10 @@ public class Controller : MonoBehaviour, IController
 {
     public virtual void handleCollision(Collision2D collision) { }
     public virtual void handleTrigger() { }
+    public virtual void handleTrigger(Collider2D collision) { }
+    
+    //not sure if this one is neccessary, you might be able to derive the game object from the collider,
+    //thus passing a reference of itself is not needed.
+    public virtual void handleTrigger(Collider2D collision, GameObject collidingObject) { }
     
 }
