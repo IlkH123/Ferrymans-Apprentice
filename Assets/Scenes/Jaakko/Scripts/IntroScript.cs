@@ -5,7 +5,7 @@ public class IntroScript : MonoBehaviour
 {
     public TMP_Text introText; // Reference to the TMP object
 
-    private float scrollSpeed = 60f; // Speed of scrolling
+    private float scrollSpeed = 80f; // Speed of scrolling
 
     private void Update()
     {
@@ -13,7 +13,7 @@ public class IntroScript : MonoBehaviour
         introText.rectTransform.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
 
         // Stop scrolling once the intro text reaches the top of the screen
-        if (introText.rectTransform.anchoredPosition.y >= 1250)
+        if (introText.rectTransform.anchoredPosition.y >= 1400)
         {
             enabled = false; // Disable the script
         }
