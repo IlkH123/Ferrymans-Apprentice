@@ -14,7 +14,7 @@ public class PlayerActions : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField]
     BoxCollider2D player_bc2D;
-    float moveSpeed, jumpForce, jumpDelay;
+    float moveSpeed, crouchedSpeed, jumpForce, jumpDelay;
     internal int jumpCount;
     internal bool jumpCheck, blocking, attacking, interacting, soulClose;
     //soulClose should probably be in input
@@ -28,8 +28,9 @@ public class PlayerActions : MonoBehaviour
     {
         rb = controller.rb;
         player_bc2D = controller.player_bc2D;
-        moveSpeed = 7f;
-        jumpForce = 15f;
+        moveSpeed = 5f;
+        crouchedSpeed = moveSpeed * 0.75f;
+        jumpForce = 20f;
         jumpDelay = 0.5f;
         rb.drag = 2f; // drag lower than 1f results in very slippery movement.
         rb.mass = 1.5f;
@@ -45,22 +46,80 @@ public class PlayerActions : MonoBehaviour
 
     internal void MovePlayer(float direction)
     {
-        rb.velocity = new Vector2(direction * moveSpeed, rb.velocity.y);
+        if (controller.player_input.crouching)
+        {
+            rb.velocity = new Vector2(direction * crouchedSpeed, rb.velocity.y);
+            if (controller.player_input.leftMove)
+            {
+                controller.player_audio.playSound(audioClip.WALK);
+                anim_EH.walkMultiplier(controller.player_input.xMove);
+                anim_EH.isCrouchWalking(controller.player_input.leftMove);
+            }
+            else if (controller.player_input.rightMove)
+            {
+                controller.player_audio.playSound(audioClip.WALK);
+                anim_EH.walkMultiplier(controller.player_input.xMove);
+                anim_EH.isCrouchWalking(controller.player_input.rightMove);
+            }
+            //this is probably superfluous, since stopping the animations are still in the controller
+            
+            //else if (!controller.player_input.leftMove && !controller.player_input.rightMove)
+            //{
+            //    anim_EH.walkMultiplier(controller.player_input.xMove);
+            //    anim_EH.isCrouchWalking(controller.player_input.rightMove);
+            //}
+        }
+        else
+        {
+            rb.velocity = new Vector2(direction * moveSpeed, rb.velocity.y);
+
+            if (controller.player_input.leftMove)
+            {
+                controller.player_audio.playSound(audioClip.WALK);
+                anim_EH.walkMultiplier(controller.player_input.xMove);
+                anim_EH.isWalking(controller.player_input.leftMove);
+            }
+            else if (controller.player_input.rightMove)
+            {
+                controller.player_audio.playSound(audioClip.WALK);
+                anim_EH.walkMultiplier(controller.player_input.xMove);
+                anim_EH.isWalking(controller.player_input.rightMove);
+            }
+            //this is probably superfluous, since stopping the animations are still in the controller
+            
+            //else if (!controller.player_input.leftMove && !controller.player_input.rightMove)
+            //{
+            //    anim_EH.walkMultiplier(controller.player_input.xMove);
+            //    anim_EH.isWalking(controller.player_input.rightMove);
+            //}
+        }
     }
 
-    internal void Jump(float direction)
+    internal void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, direction * jumpForce);
-        anim_EH.jump();
-        groundCheck = false;
-        jumpCount++;
-        if (jumpCount >= 2) 
-        { 
+        if(groundCheck && jumpCheck)
+        {
+            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            anim_EH.jump();
+            controller.player_audio.playSound(audioClip.JUMP);
             jumpCheck = false;
+            groundCheck = false;
+            jumpCount++;
+        }
+        else if (jumpCheck)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0 );
+            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            anim_EH.doubleJump();
+            controller.player_audio.playSound(audioClip.GRUNT);
+            jumpCheck = false;
+            jumpCount++;
+        }
+        if (jumpCount <= 2) 
+        { 
             StartCoroutine(JumpDelay());
         }
     }
-    //The doublejump is broken. TODO: fix this once we have a dash animation
 
     IEnumerator JumpDelay()
     {
@@ -69,8 +128,30 @@ public class PlayerActions : MonoBehaviour
     }
     internal void Attack()
     {
-        anim_EH.attack();
         attacking = true;
+        controller.staff_relay.toggleColliderOn();
+        controller.player_audio.playSound(audioClip.CANE);
+
+
+        if (controller.player_input.crouching)
+        {
+            anim_EH.crouchAttack();
+            
+        }
+        else
+        {
+            //I'm putting this here because I'm lazy
+            // TODO: find a solution where this is done when you hold down the attack button
+            // for a certain amount of time
+            if(controller.player_input.holdingShift)
+            {
+                anim_EH.powerAttack();
+            }
+            else
+            {
+                anim_EH.attack();
+            }
+        }
         
         //Debug.Log("player_actions Attack method");
         //sound
@@ -78,6 +159,7 @@ public class PlayerActions : MonoBehaviour
     public void AttackReset()
     {
         attacking = false;
+        controller.staff_relay.toggleColliderOff();
         //Debug.Log("Attack Reset");
     }
     internal void Block(bool state)
