@@ -190,6 +190,7 @@ public class PlayerActions : MonoBehaviour
         if (soulClose)
         {
             Debug.Log("Bottling souls");
+            controller.player_audio.playSound(audioClip.SOUL_IN);
             Destroy(controller.currentSoul);
             interacting = true;
             soulClose = false;
@@ -199,7 +200,8 @@ public class PlayerActions : MonoBehaviour
         }
         else if (collectibleClose)
         {
-            Debug.Log("GULP!");
+            Debug.Log("GLUG!");
+            controller.player_audio.playSound(audioClip.GLUG);
             Destroy(controller.currentCollectible);
             interacting = true;
             collectibleClose = false;

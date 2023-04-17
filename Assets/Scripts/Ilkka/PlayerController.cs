@@ -191,12 +191,14 @@ public class PlayerController : Controller, IController
         {
             player_actions.TakeDamage();
             anim_EH.takeDamage();
+            player_audio.playSound(audioClip.HIT);
             health--;
             healthbar.setHealth(health);
         }
         else if (health <= 1)
         {
             anim_EH.playerDead();
+            player_audio.playSound(audioClip.HIT);
             health--;
             healthbar.setHealth(health);
         }

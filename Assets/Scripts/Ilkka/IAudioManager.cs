@@ -12,7 +12,10 @@ public enum audioClip
     WALK = 0,
     JUMP = 1,
     CANE = 2,
-    GRUNT = 3
+    GRUNT = 3,
+    HIT = 4,
+    GLUG = 5,
+    SOUL_IN = 6
 }
 public interface IAudioManager
 {

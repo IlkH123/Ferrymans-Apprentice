@@ -7,7 +7,7 @@ public class PlayerSFX : MonoBehaviour, IAudioManager
     [SerializeField]
     internal PlayerController controller;
     [SerializeField]
-    internal AudioSource walking, jump, caneWhoosh, grunt;
+    internal AudioSource walking, jump, caneWhoosh, grunt, glug, hit, soul_in;
 
     public void playSound(audioClip clip)
     {
@@ -42,6 +42,30 @@ public class PlayerSFX : MonoBehaviour, IAudioManager
                     if (!grunt.isPlaying)
                     {
                         grunt.Play();
+                    }
+                    break;
+                }
+            case audioClip.GLUG:
+                {
+                    if (!glug.isPlaying)
+                    {
+                        glug.Play();
+                    }
+                    break;
+                }
+            case audioClip.HIT:
+                {
+                    if (!hit.isPlaying)
+                    {
+                        hit.Play();
+                    }
+                    break;
+                }
+            case audioClip.SOUL_IN:
+                {
+                    if (!soul_in.isPlaying)
+                    {
+                        soul_in.Play();
                     }
                     break;
                 }
