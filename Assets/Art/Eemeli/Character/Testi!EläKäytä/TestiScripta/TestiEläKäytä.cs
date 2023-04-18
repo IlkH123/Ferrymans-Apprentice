@@ -16,9 +16,9 @@ public class TestiEläKäytä : MonoBehaviour
     float moveSpeed;
     float currentSpeed;
     float jumpForce;
-    float colliderYstand = 28;
-    float colliderYcrouch;
-    float colliderX = 6.5f;
+   // float colliderYstand = 28;
+    //float colliderYcrouch;
+    //float colliderX = 6.5f;
     [SerializeField] public bool isGround;
     [SerializeField] public bool attacking = false;
     [SerializeField] public bool blocking = false;

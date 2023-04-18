@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : Controller, IController
 {
     int health;
-    float moveSpeed;
+    //float moveSpeed;
 
     public GameObject arrowPrefab;
     public GameObject soulPrefab;
@@ -31,7 +31,7 @@ public class EnemyController : Controller, IController
     private void Start()
     {
         health = 10;
-        moveSpeed = 7;
+        //moveSpeed = 7;
         hpscript.setMaxHealth(health); 
     }
 

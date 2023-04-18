@@ -5,7 +5,7 @@ using UnityEngine;
 public class TESTIenemy : MonoBehaviour
 {
     int health;
-    float moveSpeed;
+    //float moveSpeed;
 
     public GameObject arrowPrefab;
     public GameObject soulPrefab;
@@ -31,7 +31,7 @@ public class TESTIenemy : MonoBehaviour
     private void Start()
     {
         health = 4;
-        moveSpeed = 7;
+        //moveSpeed = 7;
         //hpscript.SetMaxHealth(health); 
     }
 
