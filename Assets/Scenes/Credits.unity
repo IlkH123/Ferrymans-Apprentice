@@ -584,10 +584,10 @@ RectTransform:
   m_Father: {fileID: 451568830}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 738.6997, y: 33.5092}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -9.4088, y: -444.6391}
+  m_SizeDelta: {x: 1257.5115, y: 769.6764}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &709574239
 MonoBehaviour:
@@ -614,12 +614,12 @@ MonoBehaviour:
     Artwork: Eemeli & James
 
     UI Design:
-    Eemeli & Jaakko
+    Eemeli & Jaakko & Ilkka
 
     Animation: Eemeli & James
 
-    Code: Ilkka, Jaakko, Karri
-    & Eemeli
+    Code: Ilkka, Jaakko,
+    Karri & Eemeli
 
     Music & SFX: Jaakko
 
@@ -650,7 +650,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -686,7 +686,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -23.632202, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -735,10 +735,10 @@ RectTransform:
   m_Father: {fileID: 451568830}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -87.25}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 200}
+  m_SizeDelta: {x: 500, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &804175469
 MonoBehaviour:
@@ -919,12 +919,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.62
+  m_fontSize: 40
   m_fontSizeBase: 11.62
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

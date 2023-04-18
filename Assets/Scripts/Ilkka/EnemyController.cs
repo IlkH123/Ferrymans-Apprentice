@@ -30,7 +30,7 @@ public class EnemyController : Controller, IController
 
     private void Start()
     {
-        health = 4;
+        health = 10;
         moveSpeed = 7;
         hpscript.setMaxHealth(health); 
     }
@@ -121,7 +121,7 @@ public class EnemyController : Controller, IController
     }
 
     // this method is broken because the staff is a trigger and not a collider, it is pointless and arse
-    public override void handleCollision(Collision2D collision)
+    public override void HandleCollision(Collision2D collision)
     {
         if (collision.collider.CompareTag("Staff"))
         {
@@ -130,7 +130,7 @@ public class EnemyController : Controller, IController
         }
     }
 
-    public override void handleTrigger() 
+    public override void HandleTrigger() 
     {
         Debug.Log("Made it to the enemy controller");
         TakeDamage();

@@ -148,15 +148,28 @@ public class CollectibleItem : MonoBehaviour
 
     // has a problem where if this were OnTriggerEnter, it would not trigger if the player is already standing within the collider and
     // OnStayEnter will call it needlessly when player stays on the item. This ghetto-ass solution works but looks and feels arse
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            if (other.gameObject.GetComponent<PlayerController>().IsCollectibleNull())
-            {
-                Debug.Log("Triggered collider on potion");
-                other.gameObject.GetComponent<Controller>().handleTrigger(col, gameObject);
-            }
-        }
-    }
+    //private void OnTriggerStay2D(Collider2D other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        var isNull = other.gameObject.GetComponent<PlayerController>().IsCollectibleNull();
+    //        if (isNull)
+    //        {
+    //            Debug.Log("Triggered collider on potion");
+    //            other.gameObject.GetComponent<Controller>().HandleTrigger(col, gameObject);
+    //        }
+    //    }
+    //}
+    //private void OnTriggerExit2D(Collider2D other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        var isNull = other.gameObject.GetComponent<PlayerController>().IsCollectibleNull();
+    //        if (isNull)
+    //        {
+    //            Debug.Log("Triggered collider on potion");
+    //            other.gameObject.GetComponent<PlayerController>().HandleTrigger(col, gameObject);
+    //        }
+    //    }
+    //}
 }

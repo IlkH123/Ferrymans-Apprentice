@@ -7,8 +7,10 @@ using UnityEngine;
 //probably be a class and not an interface.
 public interface IController
 {
-    void handleCollision(Collision2D collision);
-    void handleTrigger();
-    void handleTrigger(Collider2D collision);
-    void handleTrigger(Collider2D collision, GameObject collidingObject);
+    void HandleCollision(Collision2D collision);
+    void HandleTrigger();
+    void HandleTrigger(Collider2D collision);
+    void HandleTriggerExit(Collider2D collision);
+    void HandleTrigger(Collider2D collision, GameObject collidingObject);
+    void HandleTriggerExit(Collider2D collision, GameObject collidingObject);
 }

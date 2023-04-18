@@ -15,6 +15,10 @@ public class HealthbarScript : MonoBehaviour
     }
     internal void setMaxHealth(int health)
     {
+        if (slider == null)
+        {
+            slider = gameObject.GetComponent<Slider>();
+        }
         slider.maxValue = health;
         slider.value = health;
     }

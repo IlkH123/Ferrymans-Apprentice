@@ -21,9 +21,12 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     internal bool groundCheck;
 
+    [SerializeField] LayerMask mask = default;
+    internal GameObject currentSoul, currentCollectible;
+
     // TODO: I suspect these booleans are superfluous, look into removing these booleans and
     // instead use the ones in input and pass them through the call in the controller
-    
+
     void Start()
     {
         rb = controller.rb;
@@ -68,16 +71,16 @@ public class PlayerActions : MonoBehaviour
                 }
             }
             //this is probably superfluous, since stopping the animations are still in the controller
-
-            //else if (!controller.player_input.leftMove && !controller.player_input.rightMove)
-            //{
-            //    anim_EH.walkMultiplier(controller.player_input.xMove);
-            //    anim_EH.isCrouchWalking(controller.player_input.rightMove);
-            //}
+            else if (!controller.player_input.leftMove && !controller.player_input.rightMove)
+            {
+                anim_EH.walkMultiplier(controller.player_input.xMove);
+                anim_EH.isCrouchWalking(controller.player_input.rightMove);
+            }
         }
         else
         {
             rb.velocity = new Vector2(direction * moveSpeed, rb.velocity.y);
+            anim_EH.isCrouchWalking(false);
 
             if (controller.player_input.leftMove)
             {
@@ -97,13 +100,13 @@ public class PlayerActions : MonoBehaviour
                     controller.player_audio.playSound(audioClip.WALK);
                 }
             }
-            //this is probably superfluous, since stopping the animations are still in the controller
             
-            //else if (!controller.player_input.leftMove && !controller.player_input.rightMove)
-            //{
-            //    anim_EH.walkMultiplier(controller.player_input.xMove);
-            //    anim_EH.isWalking(controller.player_input.rightMove);
-            //}
+            //this is probably superfluous, since stopping the animations are still in the controller
+            else if (!controller.player_input.leftMove && !controller.player_input.rightMove)
+            {
+                anim_EH.walkMultiplier(controller.player_input.xMove);
+                anim_EH.isWalking(controller.player_input.rightMove);
+            }
         }
     }
 
@@ -186,12 +189,32 @@ public class PlayerActions : MonoBehaviour
         // TODO: implement branching logic for other
         // interactions besides collecting souls
         Debug.Log("Interaction action trigger");
+        Collider2D collision = Physics2D.OverlapCircle(transform.position, 2f, mask);
+        if (collision != null) 
+        {
+            if (collision.CompareTag("Soul"))
+            {
+                soulClose = true;
+                currentSoul = collision.gameObject;
+                
+            }
+            else if (collision.CompareTag("Health"))
+            {
+                collectibleClose = true;
+                currentCollectible = collision.gameObject;
+            }
+        }
+        else 
+        {
+            Debug.Log("Found nothing");
+        }
+
 
         if (soulClose)
         {
             Debug.Log("Bottling souls");
             controller.player_audio.playSound(audioClip.SOUL_IN);
-            Destroy(controller.currentSoul);
+            Destroy(currentSoul);
             interacting = true;
             soulClose = false;
             anim_EH.collectSoul();
@@ -202,7 +225,7 @@ public class PlayerActions : MonoBehaviour
         {
             Debug.Log("GLUG!");
             controller.player_audio.playSound(audioClip.GLUG);
-            Destroy(controller.currentCollectible);
+            Destroy(currentCollectible);
             interacting = true;
             collectibleClose = false;
             controller.setHealth(controller.maxHealth);
@@ -234,6 +257,18 @@ public class PlayerActions : MonoBehaviour
         //    //GameOver
         //    player_animator.SetBool("playerDead", true);
         //}
+    }
+
+    public bool IsCollectibleNull()
+    {
+        if (currentCollectible == null) { return true; }
+        else return false;
+    }
+
+    public bool IsSoulNull()
+    {
+        if (currentSoul == null) { return true; }
+        else return false;
     }
 
     // Why isn't this in the controller? This one fits here, the ther one fits better into the controller,

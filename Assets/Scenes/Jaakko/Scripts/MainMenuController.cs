@@ -6,13 +6,13 @@ public class MainMenuController : MonoBehaviour
     public void StartGame()
     {
         // Load the desired scene when the Start Game button is clicked
-        SceneManager.LoadScene("Cabin");
+        GameConductor.ChangeSceneStatic(GameConductor.SceneName.CABIN);
     }
 
     public void ShowCredits()
     {
         // Load the desired scene when the Credits button is clicked
-        SceneManager.LoadScene("Credits");
+        GameConductor.ChangeSceneStatic(GameConductor.SceneName.CREDITS);
     }
 
     public void ExitGame()

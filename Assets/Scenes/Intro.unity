@@ -5232,7 +5232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressAnyKeyText: {fileID: 586572626}
-  nextSceneName: Main Menu
+  nextSceneName: 1
   delayBeforePrompt: 20
 --- !u!4 &366356694
 Transform:

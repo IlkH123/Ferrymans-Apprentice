@@ -10,7 +10,7 @@ public class TailAttack : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             var controller = collision.gameObject.GetComponent<PlayerController>();
-            controller.handleCollision(collision);
+            controller.HandleCollision(collision);
         }
     }
 }

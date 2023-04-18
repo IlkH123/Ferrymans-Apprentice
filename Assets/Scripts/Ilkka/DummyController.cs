@@ -38,7 +38,7 @@ public class DummyController : Controller, IController
 
     internal void takeDamage()
     {
-        hitPoints--;
+        //hitPoints--;
         if(hitPoints > 0)
         {
             animator.SetTrigger("dummyHit");
@@ -49,7 +49,7 @@ public class DummyController : Controller, IController
         }
     }
 
-    void IController.handleCollision(Collision2D collision)
+    void IController.HandleCollision(Collision2D collision)
     {
         
     }

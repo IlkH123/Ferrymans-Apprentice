@@ -6,7 +6,7 @@ public class ButtonSceneChange : MonoBehaviour
     public void BackToMenu()
     {
         // Load the desired scene when the button is clicked
-        SceneManager.LoadScene("Main Menu");
+        GameConductor.ChangeSceneStatic(GameConductor.SceneName.MAIN_MENU);
     }
 
 }

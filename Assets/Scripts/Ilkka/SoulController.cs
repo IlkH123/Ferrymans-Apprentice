@@ -59,7 +59,7 @@ public class SoulController : Controller
     //    }
     //}
 
-    public override void handleCollision(Collision2D collision)
+    public override void HandleCollision(Collision2D collision)
     {
         if (collision.collider.CompareTag("Ground"))
         {
@@ -79,13 +79,13 @@ public class SoulController : Controller
     //    }
     //}
 
-    public override void handleTrigger(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            other.gameObject.GetComponent<Controller>().handleTrigger(my_collider, gameObject);
-        }
-    }
+    //public override void HandleTrigger(Collider2D other)
+    //{
+    //    if (other.CompareTag("Player") && other.gameObject.GetComponent<PlayerController>().IsSoulNull())
+    //    {
+    //        other.gameObject.GetComponent<PlayerController>().HandleTrigger(my_collider, gameObject);
+    //    }
+    //}
 
     void OnDrawGizmosSelected()
     {

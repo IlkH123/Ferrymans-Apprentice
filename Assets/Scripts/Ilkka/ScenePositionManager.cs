@@ -6,11 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class ScenePositionManager : MonoBehaviour
 {
-    int currentSceneIndex;
-
-    // This is supposed to be where the positional stuff from CameraFocus goes.
-    // Currently it's shit and broken and does nothing.
-    // TODO: FIXME should there be time
+    [SerializeField] GameObject player;
+    GameObject spawnpoint;
 
     // Start is called before the first frame update
     void Start()
@@ -19,33 +16,29 @@ public class ScenePositionManager : MonoBehaviour
         
     }
 
-    //private void Awake()
-    //{
-    //    currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-    //    switch (currentSceneIndex)
-    //    {
-    //        case 1:
-    //            //Intro + Cabin
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
-    //            break;
-    //        case 2:
-    //            //Forest 1-1
-    //            gameObject.transform.position = new Vector3( -20, 6, 0);
-    //            Debug.Log("entered Forest 1-1");
-    //            break;
-    //        case 3:
-    //            //Forest 1-2
-                
-    //            break;
-    //        case 4:
-    //            //Forest 1-3
-    //            break;
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
 
-    //    }
-        
-    //}
+        //Dunno why this broke, but will not survive exit to main menu and restart
+        //spawnpoint = null;
+        //Vector3 spawn = GameObject.Find("Spawnpoint").transform.position;
+        //if (spawnpoint != null) {
+        //player.transform.position = spawn;
+        //}
+        // Let's do hardcoded garbage instead. /s
 
-    // Update is called once per frame
+        if (GameConductor.instance.GetSceneIndexAsSceneName() == GameConductor.SceneName.FOREST1_1) 
+        {
+            player.transform.position = new Vector3(-20, 1, 0);
+        }
+
+    }
+
     void Update()
     {
         

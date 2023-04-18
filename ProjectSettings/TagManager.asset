@@ -14,6 +14,7 @@ TagManager:
   - Soul
   - Staff
   - Spawn
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -48,6 +49,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background (no light)
+    uniqueID: 1025168259
+    locked: 0
+  - name: Background
+    uniqueID: 1155750067
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

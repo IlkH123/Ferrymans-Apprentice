@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CabinDoorTrigger : MonoBehaviour
 {
-    public string scene;
+    public GameConductor.SceneName scene;
     public string triggerName;
     [SerializeField] GameObject openCabinDoor;
 
@@ -20,13 +16,13 @@ public class CabinDoorTrigger : MonoBehaviour
         if (collision.CompareTag(triggerName))
         {
             openCabinDoor.SetActive(true);
-            Invoke("LoadSceneWithDelay", 2f);
+            Invoke("LoadSceneWithDelay", 0.5f);
         }
     }
 
     void LoadSceneWithDelay()
     {
-        SceneManager.LoadScene(scene);
+        GameConductor.ChangeSceneStatic(scene);
     }
 }
 

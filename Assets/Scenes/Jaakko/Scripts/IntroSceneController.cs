@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class IntroSceneController : MonoBehaviour
 {
     public GameObject pressAnyKeyText;
-    public string nextSceneName;
+    public GameConductor.SceneName nextSceneName;
     public float delayBeforePrompt = 2.0f;
 
     private bool promptShown = false;
@@ -27,7 +27,7 @@ public class IntroSceneController : MonoBehaviour
         // If any key is pressed, load the next scene
         if (Input.anyKeyDown)
         {
-            SceneManager.LoadScene(nextSceneName);
+            GameConductor.ChangeSceneStatic(nextSceneName);
         }
     }
 }
